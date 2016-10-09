@@ -19,6 +19,7 @@ import java.util.Set;
  */
 public class myShiro extends AuthorizingRealm {
 
+    
     /**
      * 设定Password校验.
      */
