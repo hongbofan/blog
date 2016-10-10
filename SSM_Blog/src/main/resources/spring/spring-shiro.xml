@@ -10,7 +10,7 @@
     http://www.springframework.org/schema/tx
     http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
-    <context:component-scan base-package="com.hbf" />
+    <context:component-scan base-package="red.bofan" />
 
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <!-- ref对应我们写的realm  MyShiro -->
@@ -18,7 +18,7 @@
         <!-- 使用下面配置的缓存管理器 -->
         <property name="cacheManager" ref="cacheManager"/>
     </bean>
-    <bean id="myShiro" class="com.hbf.util.myShiro"></bean>
+    <bean id="myShiro" class="red.bofan.util.myShiro"></bean>
     <bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
     <!--
@@ -46,10 +46,10 @@
                                 /user/edit/**=roles[manager]-->
                 <!--所有的请求(除去配置的静态资源请求或请求地址为anon的请求)都要通过登录验证,如果未登录则跳到/login-->
                 <!--/** = authc-->
-                /records/** = authc
+<!--                /records/** = authc
                 /teachers/** = authc
                 /records/delete/** = roles[root]
-                /teachers/appointOrNotAdmin/** = roles[root]
+                /teachers/appointOrNotAdmin/** = roles[root]-->
             </value>
         </property>
     </bean>
