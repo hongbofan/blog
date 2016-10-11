@@ -9,14 +9,89 @@
 <html>
 <head>
     <title>Title</title>
-    <link href="./css/flat-ui.min.css" rel="stylesheet">
+    <link href="../assert/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="../assert/css/flat-ui.min.css" rel="stylesheet">
+    <link href="../assert/css/docs.css" rel="stylesheet">
+    <link rel="shortcut icon" href="../assert/img/favicon.ico">
 </head>
 <body>
-    <div class="container">
-        <h1>Hello, world!</h1>
+    <h1 class="demo-headline">Components</h1>
+    <!-- Static navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                </button>
+                <a class="navbar-brand" href="#">Flat UI</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Nav header</li>
+                            <li><a href="#">Separated link</a></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="../navbar/">Default</a></li>
+                    <li class="active"><a href="./">Static top</a></li>
+                    <li><a href="../navbar-fixed-top/">Fixed top</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+
+        </div>
     </div>
-
-
-    <script src="./js/flat-ui.min.js"></script>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Navbar example</h1>
+            <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
+            <p>To see the difference between static and fixed top navbars, just scroll.</p>
+            <p>
+                <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
+            </p>
+        </div>
+        <p class="mtl ptl">The minimal look:</p>
+        <div>
+            <ul class="pagination pagination-minimal">
+                <li class="previous"><a href="#fakelink" class="fui-arrow-left"></a></li>
+                <li class="active"><a href="#fakelink">1</a></li>
+                <li><a href="#fakelink">2</a></li>
+                <li><a href="#fakelink">3</a></li>
+                <li><a href="#fakelink">4</a></li>
+                <li><a href="#fakelink">5</a></li>
+                <li><a href="#fakelink">6</a></li>
+                <li><a href="#fakelink">7</a></li>
+                <li><a href="#fakelink">8</a></li>
+                <li><a href="#fakelink">9</a></li>
+                <li><a href="#fakelink">10</a></li>
+                <li class="pagination-dropdown dropup">
+                    <a href="#fakelink" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fui-triangle-up"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#fakelink">10–20</a></li>
+                        <li><a href="#fakelink">20–30</a></li>
+                        <li><a href="#fakelink">40–50</a></li>
+                    </ul>
+                </li>
+                <li class="next"><a href="#fakelink" class="fui-arrow-right"></a></li>
+            </ul>
+        </div>
+    </div>
+    <script src="../assert/js/jquery.min.js"></script>
+    <script src="../assert/js/flat-ui.min.js"></script>
+    <script src="../assert/js/application.js"></script>
 </body>
 </html>
