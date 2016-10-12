@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="../assert/css/editormd.css" />
 </head>
 <body>
-<form method="post" action="http://editormd.ipandao.com/php/post.php">
+<form method="post" action="http://localhost:8080/article/upload.do">
     <div class="editormd" id="test-editormd">
         <textarea class="editormd-markdown-textarea" name="test-editormd-markdown-doc">[TOC]
 #### Disabled options
@@ -48,19 +48,24 @@
 ```
         </textarea>
         <!-- 第二个隐藏文本域，用来构造生成的HTML代码，方便表单POST提交，这里的name可以任意取，后台接受时以这个name键为准 -->
-        <textarea class="editormd-html-textarea" name="text"></textarea>
+        <textarea class="editormd-html-textarea" name="test-editormd-html-code"></textarea>
     </div>
-</form>
     <div style="width:90%;margin: 10px auto;">
         <input type="submit" name="submit" value="提交表单 Submit" style="padding: 5px;" />
+        <%--<a href="javascript:void(0);" onclick="submitContent()">aaa</a>--%>
     </div>
+</form>
+
     <script src="../assert/js/jquery.min.js"></script>
     <script src="../assert/js/editormd.min.js"></script>
-    <script type="text/javascript">
 
+    <script type="text/javascript">
+        $(document).ready(function (){
+//            submitContent();
+        });
+        var testEditor;
         $(function() {
-            $.get("./article/upload",function () {
-                var testEditor = editormd("test-editormd", {
+                testEditor = editormd("test-editormd", {
                     width   : "90%",
                     height  : 640,
                     syncScrolling : "single",
@@ -73,12 +78,30 @@
                     imageUploadURL : "/file/uploadFile.do",
                     saveHTMLToTextarea : true
                 });
-           });
             //alert(testEditor.getHTML());
             //alert(testEditor.getMarkdown());
             //alert(testEditor.getPreviewedHTML());
-        });
 
+        });
+//        submitContent = function () {
+//            //var markdown = testEditor.getMarkdown();
+//            //var html = testEditor.getHTML();
+//            $.ajax({url:"../article/upload.do",data: "testEditor="+ (testEditor = editormd("test-editormd", {
+//                width   : "90%",
+//                height  : 640,
+//                syncScrolling : "single",
+//                path    : "../assert/lib/",
+//                theme   : "dark",
+//                previewTheme : "dark",
+//                editorTheme : "pastel-on-dark",
+//                imageUpload : true,
+//                imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+//                imageUploadURL : "/file/uploadFile.do",
+//                saveHTMLToTextarea : true
+//            })),type:"POST",success:function(result){
+//                alert(result);
+//            }});
+//        };
     </script>
 </body>
 </html>
