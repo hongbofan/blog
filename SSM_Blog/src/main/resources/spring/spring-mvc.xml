@@ -13,7 +13,7 @@
             http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
     <!-- 扫描controller（controller层注入） -->
-    <context:component-scan base-package="red.bofan" />
+    <context:component-scan base-package="red.bofan.controller" />
     <!-- 支持spring mvc的注解 -->
     <mvc:annotation-driven />
 

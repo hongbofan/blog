@@ -11,6 +11,6 @@
     <p class="text-center">Copyright © 2016 听课管理系统 All Rights Reserved.</p>
 </div>
 
-<script src="/assert/js/jquery.min.js"></script>
-<script src="/assert/js/flat-ui.min.js"></script>
-<script src="/assert/js/application.js"></script>
+<script src="../../assert/js/jquery.min.js"></script>
+<script src="../../assert/js/flat-ui.min.js"></script>
+<script src="../../assert/js/application.js"></script>
