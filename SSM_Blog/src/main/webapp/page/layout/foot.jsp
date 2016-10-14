@@ -14,3 +14,11 @@
 <script src="../../assert/js/jquery.min.js"></script>
 <script src="../../assert/js/flat-ui.min.js"></script>
 <script src="../../assert/js/application.js"></script>
+<script src="../../assert/js/underscore-min.js"></script>
+<script type="text/javascript">
+    _.templateSettings = {
+        evaluate : /\{%([\s\S]+?)\%\}/g,
+        interpolate : /\{%=([\s\S]+?)\%\}/g,
+        escape : /\{%-([\s\S]+?)%\}/g
+    };
+</script>

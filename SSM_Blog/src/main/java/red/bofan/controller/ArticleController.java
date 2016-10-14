@@ -6,10 +6,14 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import red.bofan.model.Article;
 import red.bofan.service.ArticleService;
+import red.bofan.util.PaginationVo;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -40,7 +44,19 @@ public class ArticleController {
     @RequestMapping(value = "/showContent.do",method = RequestMethod.GET)
     public String showContent(ModelMap map,RedirectAttributes attr){
         System.out.println("attr="+ attr.getFlashAttributes().get("html"));
-        return "article_content";
 
+        PaginationVo<Article> paginationVo = articleService.selectByPageWithSearch(1,2,"");
+        paginationVo.getList().forEach(e -> System.out.println(e.getTitle()));
+        return "article_content";
+    }
+    @ResponseBody
+    @RequestMapping(value = "/list.json", method = RequestMethod.GET)
+    public Map list(@RequestParam(value = "p", defaultValue = "1") Integer p){
+        Map<String,Object> result = new HashMap<>();
+        PaginationVo<Article> paginationVo = articleService.selectByPageWithSearch(p,2,"");
+        result.put("articles",paginationVo.getList());
+        System.out.println(paginationVo.getPageNum());
+        result.put("pageInfo",paginationVo);
+        return result;
     }
 }

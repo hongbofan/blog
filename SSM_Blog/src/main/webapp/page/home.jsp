@@ -29,32 +29,57 @@
         </div>
         <p class="mtl ptl">The minimal look:</p>
         <div>
-            <ul class="pagination pagination-minimal">
-                <li class="previous"><a href="#fakelink" class="fui-arrow-left"></a></li>
-                <li class="active"><a href="#fakelink">1</a></li>
-                <li><a href="#fakelink">2</a></li>
-                <li><a href="#fakelink">3</a></li>
-                <li><a href="#fakelink">4</a></li>
-                <li><a href="#fakelink">5</a></li>
-                <li><a href="#fakelink">6</a></li>
-                <li><a href="#fakelink">7</a></li>
-                <li><a href="#fakelink">8</a></li>
-                <li><a href="#fakelink">9</a></li>
-                <li><a href="#fakelink">10</a></li>
-                <li class="pagination-dropdown dropup">
-                    <a href="#fakelink" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fui-triangle-up"></i>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#fakelink">10–20</a></li>
-                        <li><a href="#fakelink">20–30</a></li>
-                        <li><a href="#fakelink">40–50</a></li>
-                    </ul>
-                </li>
-                <li class="next"><a href="#fakelink" class="fui-arrow-right"></a></li>
+            <ul class="pagination pagination-minimal" id="pagination-box">
+
+
+
             </ul>
         </div>
     </div>
+
     <jsp:include page="layout/foot.jsp"></jsp:include>
+
+
+<script>
+    $(document).ready(function () {
+        getArticleListBySearch(1);
+    });
+    getArticleListBySearch=function(page){
+        $.ajax({url:"../article/list.json?p="+page,type:"GET",success:function(result){
+//            var teamListTemplate = _.template($("#record-list-template").html());
+//            var vars = { datas:result.pageInfo.list,subNames:result.subNames,pagenum:result.pageInfo.pageNum };
+//            var html = teamListTemplate(vars);
+//            $("#main-info-box").html(html);
+            var paginationTemplate=_.template($("#pagination-template").html(),{pageCount:result.pageInfo.pageCount,pagenum:result.pageInfo.pageNum});
+            $("#pagination-box").html(paginationTemplate);
+        }});
+    };
+
+</script>
+    <script id="pagination-template" type="text/template">
+        <li class="previous"><a href="javascript:void(0);" onclick="getArticleListBySearch({%- pagenum-1 %})" class="fui-arrow-left"></a></li>
+        {%for(var i=1; i<= pageCount; i++){ %}
+        <li
+                {% if (pagenum == i){ %}
+                class="active"
+                {% } %}
+        >
+            <a href="javascript:void(0);" onclick="getArticleListBySearch({%- i %})">
+                {%- i %}
+            </a>
+        </li>
+        {% } %}
+        <li class="pagination-dropdown dropup">
+            <a href="#fakelink" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="fui-triangle-up"></i>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="#fakelink">10–20</a></li>
+                <li><a href="#fakelink">20–30</a></li>
+                <li><a href="#fakelink">40–50</a></li>
+            </ul>
+        </li>
+        <li class="next"><a href="javascript:void(0);" onclick="getArticleListBySearch({%- pagenum+1 %})" class="fui-arrow-right"></a></li>
+    </script>
 </body>
 </html>
