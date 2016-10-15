@@ -14,6 +14,9 @@ public class ArticleService {
     @Autowired
     private ArticleMapper articleMapper;
 
+    public Article selectByPrimaryKey(String id){
+        return articleMapper.selectByPrimaryKey(id);
+    }
     public int insertSelective(Article article){
         return articleMapper.insertSelective(article);
     }

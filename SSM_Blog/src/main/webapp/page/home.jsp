@@ -63,7 +63,7 @@
                             <img src="../../img/icons/svg/loop.svg" alt="Infinity-Loop" class="tile-image">
                             <h3 class="tile-title">{%= list[article]['title'] %}</h3>
                             <p>&nbsp</p>
-                            <a class="btn btn-primary btn-large btn-block" href="http://designmodo.com/flat">Get Pro</a>
+                            <a class="btn btn-primary btn-large btn-block" href="/article/{%= list[article]['id'] %}.htm">Get Pro</a>
                         </div>
                     </div>
                 {% } %}

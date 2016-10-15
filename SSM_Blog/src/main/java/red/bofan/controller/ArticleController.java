@@ -2,11 +2,9 @@ package red.bofan.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import red.bofan.model.Article;
 import red.bofan.service.ArticleService;
@@ -48,6 +46,19 @@ public class ArticleController {
         PaginationVo<Article> paginationVo = articleService.selectByPageWithSearch(1,2,"");
         paginationVo.getList().forEach(e -> System.out.println(e.getTitle()));
         return "article_content";
+    }
+    @ResponseBody
+    @RequestMapping(value = "/{id}.json",method = RequestMethod.GET)
+    public Map<String,Object> getOne(@PathVariable("id")String id){
+        Map<String,Object> result = new HashMap<>();
+        Article article = articleService.selectByPrimaryKey(id);
+        result.put("article",article);
+        return result;
+    }
+    @RequestMapping(value = "/{id}.htm",method = RequestMethod.GET)
+    public String getSingle(@PathVariable(value = "id")String id,Model model){
+        model.addAttribute("id",id);
+        return "article";
     }
     @ResponseBody
     @RequestMapping(value = "/list.json", method = RequestMethod.GET)
