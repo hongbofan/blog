@@ -27,12 +27,12 @@
                 <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
             </p>
         </div>
+        <div class="row" id="article-list-box">
+
+        </div> <!-- /row -->
         <p class="mtl ptl">The minimal look:</p>
         <div>
             <ul class="pagination pagination-minimal" id="pagination-box">
-
-
-
             </ul>
         </div>
     </div>
@@ -46,39 +46,84 @@
     });
     getArticleListBySearch=function(page){
         $.ajax({url:"../article/list.json?p="+page,type:"GET",success:function(result){
-//            var teamListTemplate = _.template($("#record-list-template").html());
-//            var vars = { datas:result.pageInfo.list,subNames:result.subNames,pagenum:result.pageInfo.pageNum };
-//            var html = teamListTemplate(vars);
-//            $("#main-info-box").html(html);
+            var articleListTemplate = _.template($("#article-list-template").html(),{list:result.pageInfo.list});
+            $("#article-list-box").html(articleListTemplate);
             var paginationTemplate=_.template($("#pagination-template").html(),{pageCount:result.pageInfo.pageCount,pagenum:result.pageInfo.pageNum});
             $("#pagination-box").html(paginationTemplate);
         }});
     };
 
 </script>
+    <script id="article-list-template" type="text/template">
+        <div class="col-lg-12">
+            <div class="row">
+                {% for( var article in list){  %}
+                    <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+                        <div class="tile">
+                            <img src="../../img/icons/svg/loop.svg" alt="Infinity-Loop" class="tile-image">
+                            <h3 class="tile-title">{%= list[article]['title'] %}</h3>
+                            <p>&nbsp</p>
+                            <a class="btn btn-primary btn-large btn-block" href="http://designmodo.com/flat">Get Pro</a>
+                        </div>
+                    </div>
+                {% } %}
+            </div> <!-- /row -->
+        </div>
+    </script>
     <script id="pagination-template" type="text/template">
         <li class="previous"><a href="javascript:void(0);" onclick="getArticleListBySearch({%- pagenum-1 %})" class="fui-arrow-left"></a></li>
-        {%for(var i=1; i<= pageCount; i++){ %}
-        <li
-                {% if (pagenum == i){ %}
-                class="active"
+
+        {%
+        var ThisPage = pagenum;
+        var pageFor = 6;
+        var pageSlipt = pageFor / 2;
+        var pageNumber = pageCount;
+        //如果页码大于规定的显示页码数则进行操作否则按基本的页码显示
+        if (pageNumber > pageFor) {
+            if (ThisPage > pageSlipt) {
+                if (ThisPage > (pageNumber - pageSlipt)) {
+                        countPage = pageNumber + 1;
+                }else{
+                    countPage = ((ThisPage - pageSlipt) + pageFor);
+                }
+        %}
+                {%for(var i=countPage - pageFor;i< countPage; i++){ %}
+                    <li
+                            {% if (ThisPage == i){ %}
+                            class="active"
+                            {% } %}
+                    >
+                        <a href="javascript:void(0);" onclick="getArticleListBySearch({%- i %})">
+                            {%- i %}
+                        </a>
+                    </li>
                 {% } %}
-        >
-            <a href="javascript:void(0);" onclick="getArticleListBySearch({%- i %})">
-                {%- i %}
-            </a>
-        </li>
+        {%  }else{ %}
+                {%for(var i=1; i<= pageFor; i++){ %}
+                <li
+                        {% if (ThisPage == i){ %}
+                        class="active"
+                        {% } %}
+                >
+                    <a href="javascript:void(0);" onclick="getArticleListBySearch({%- i %})">
+                        {%- i %}
+                    </a>
+                </li>
+                {% } %}
+            {% } %}
+        {% }else{ %}
+            {%for(var i=1; i<= pageCount; i++){ %}
+            <li
+                    {% if (ThisPage == i){ %}
+                    class="active"
+                    {% } %}
+            >
+                <a href="javascript:void(0);" onclick="getArticleListBySearch({%- i %})">
+                    {%- i %}
+                </a>
+            </li>
+            {% } %}
         {% } %}
-        <li class="pagination-dropdown dropup">
-            <a href="#fakelink" class="dropdown-toggle" data-toggle="dropdown">
-                <i class="fui-triangle-up"></i>
-            </a>
-            <ul class="dropdown-menu">
-                <li><a href="#fakelink">10–20</a></li>
-                <li><a href="#fakelink">20–30</a></li>
-                <li><a href="#fakelink">40–50</a></li>
-            </ul>
-        </li>
         <li class="next"><a href="javascript:void(0);" onclick="getArticleListBySearch({%- pagenum+1 %})" class="fui-arrow-right"></a></li>
     </script>
 </body>
