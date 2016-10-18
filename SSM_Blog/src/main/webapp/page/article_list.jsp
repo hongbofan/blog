@@ -22,6 +22,7 @@
 <jsp:include page="layout/nav.jsp"></jsp:include>
 <h1 class="demo-headline">Components</h1>
     <div class="container">
+        <a href="/article/editor.htm" class="btn btn-primary">Write</a>
         <div class="row" id="article-list-box">
         </div> <!-- /row -->
         <section id="grid" class="grid clearfix">

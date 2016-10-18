@@ -19,10 +19,17 @@ import java.util.UUID;
  */
 @Controller
 @RequestMapping("/article")
-public class ArticleController {
+public class ArticleController extends BaseController{
     @Autowired
     private ArticleService articleService;
 
+    /**
+     * 文章提交
+     * @param markdown
+     * @param html
+     * @param attr
+     * @return
+     */
     @RequestMapping(value = "/upload.do", method = RequestMethod.POST)
     public String upload(@RequestParam(value = "test-editormd-markdown-doc", required = false) String markdown,
                          @RequestParam(value = "test-editormd-html-code", required = false) String html,
@@ -78,5 +85,9 @@ public class ArticleController {
     @RequestMapping(value = "/list.htm", method = RequestMethod.GET)
     public String list() {
         return "article_list";
+    }
+    @RequestMapping(value = "/editor.htm", method = RequestMethod.GET)
+    public String editor() {
+        return "article_editor";
     }
 }

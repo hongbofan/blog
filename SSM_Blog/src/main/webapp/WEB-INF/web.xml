@@ -84,7 +84,7 @@
 
   <!-- 默认访问路径-->
   <welcome-file-list>
-    <welcome-file>index.htm</welcome-file>
+    <welcome-file>home.htm</welcome-file>
   </welcome-file-list>
 
 </web-app>

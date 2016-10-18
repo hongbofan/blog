@@ -199,7 +199,19 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.qiniu</groupId>
+      <artifactId>qiniu-java-sdk</artifactId>
+      <version>[7.0.0, 7.1.99]</version>
+    </dependency>
   </dependencies>
+
+
 
   <properties>
     <org.apache.logging.log4j.version>2.6.2</org.apache.logging.log4j.version>
