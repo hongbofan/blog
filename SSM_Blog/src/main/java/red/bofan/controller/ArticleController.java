@@ -76,7 +76,7 @@ public class ArticleController extends BaseController{
     @RequestMapping(value = "/list.json", method = RequestMethod.GET)
     public Map list(@RequestParam(value = "p", defaultValue = "1") Integer p) {
         Map<String, Object> result = new HashMap<>();
-        PaginationVo<Article> paginationVo = articleService.selectByPageWithSearch(p, 2, "");
+        PaginationVo<Article> paginationVo = articleService.selectByPageWithSearch(p, 8, "");
         result.put("articles", paginationVo.getList());
         System.out.println(paginationVo.getPageNum());
         result.put("pageInfo", paginationVo);
