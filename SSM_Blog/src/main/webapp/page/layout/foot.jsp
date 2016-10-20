@@ -22,3 +22,8 @@
         escape : /\{%-([\s\S]+?)%\}/g
     };
 </script>
+<script>
+    $(document).ready(function (){
+        checkLogin();
+    });
+</script>

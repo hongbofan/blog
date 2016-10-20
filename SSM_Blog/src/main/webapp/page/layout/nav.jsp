@@ -22,8 +22,43 @@
                 <li id="nav_cipher"><a href="#contact" >Cipher</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li id="nav_login"><a href="./">Login</a></li>
+                <li><a href="/user_login.htm" id="nav-login-link">Login</a></li>
+                <li class="dropdown">
+                    <a href="javascript:void(0);" id="nav-user-info" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="javascript:void(0);" onclick="UserLoginOut()">Log out</a></li>
+                    </ul>
+                </li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
 </div>
+<script>
+    UserLoginOut=function(){
+        $.ajax({
+            url : "../logout.do",
+            method : "get",
+            success : function(data){
+                window.location.reload();
+            }
+        });
+    };
+    checkLogin=function(){
+        $.ajax({
+            url : "../check.do",
+            method : "get",
+            success : function(data){
+                if(data.result == true){
+                    //用户已经登录的情况
+                    $("#nav-login-link").remove();
+                    $("#nav-user-info").html(data.username);
+//                    $("#person-center-link").attr("href","../users/"+data.userId+".htm");
+//                    userId = data.userId;
+                }else{
+                    //用户没有登录的时候
+                    $("#nav-user-info").remove();
+                }
+            }
+        });
+    };
+</script>

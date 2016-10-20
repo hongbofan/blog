@@ -8,6 +8,9 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
+import red.bofan.model.User;
+import red.bofan.service.UserService;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -45,10 +48,18 @@ public class myShiro extends AuthorizingRealm {
     }
 //    @Resource
 //    private AdminService adminService;
+    @Autowired
+    private UserService userService;
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
 
         UsernamePasswordToken token = (UsernamePasswordToken)authenticationToken;
+        User user = userService.selectByName(token.getUsername());
+        if (null != user){
+            AuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user.getName(),user.getPassword(),this.getName());
+
+            return authenticationInfo;
+        }
 //
 //      Admin admin = adminService.login(token.getUsername());
 //      if(null != admin){
@@ -60,18 +71,5 @@ public class myShiro extends AuthorizingRealm {
 //      }
         return null;
     }
-    /**
-     * 将一些数据放到ShiroSession中,以便于其它地方使用
-     * 比如Controller,使用时直接用HttpSession.getAttribute(key)就可以取到
-     */
-    private void setSession(Object key, Object value){
-        Subject currentUser = SecurityUtils.getSubject();
-        if(null != currentUser){
-            Session session = currentUser.getSession();
-            System.out.println("Session默认超时时间为[" + session.getTimeout() + "]毫秒");
-            if(null != session){
-                session.setAttribute(key, value);
-            }
-        }
-    }
+
 }
