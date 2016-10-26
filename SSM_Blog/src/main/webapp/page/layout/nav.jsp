@@ -19,7 +19,7 @@
             <ul class="nav navbar-nav">
                 <li class="active" id="nav_home"><a href="/home.htm">Home</a></li>
                 <li id="nav_article"><a href="/article/list.htm" >Article</a></li>
-                <li id="nav_cipher"><a href="#contact" >Cipher</a></li>
+                <li id="nav_cipher"><a href="/cipher/index.htm" >Cipher</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/user_login.htm" id="nav-login-link">Login</a></li>
