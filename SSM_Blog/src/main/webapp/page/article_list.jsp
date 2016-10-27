@@ -53,6 +53,7 @@
 <script>
     $(document).ready(function (){
         $("#nav_home").removeClass("active");
+        $("#nav_cipher").removeClass("active");
         $("#nav_article").addClass("active");
         getArticleListBySearch(1);
     });

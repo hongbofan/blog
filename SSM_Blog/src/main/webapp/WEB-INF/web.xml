@@ -92,6 +92,10 @@
     <servlet-name>spring</servlet-name>
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>spring</servlet-name>
+    <url-pattern>/webSocket/*</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>DruidStatView</servlet-name>
     <servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>

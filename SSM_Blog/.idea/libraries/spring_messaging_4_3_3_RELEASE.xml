@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="spring-messaging-4.3.3.RELEASE">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../apache-maven-3.3.9/pool/org/springframework/spring-messaging/4.3.3.RELEASE/spring-messaging-4.3.3.RELEASE.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

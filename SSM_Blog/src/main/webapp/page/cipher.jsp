@@ -9,74 +9,46 @@
 <html>
 <head>
     <title>Title</title>
-    <script src="//cdn.bootcss.com/sockjs-client/1.1.1/sockjs.min.js"></script>
-    <script src="//cdn.bootcss.com/stomp.js/2.3.3/stomp.min.js"></script>
-    <script>
-        var stompClient = null;
-
-        function setConnected(connected) {
-            document.getElementById('connect').disabled = connected;
-            document.getElementById('disconnect').disabled = !connected;
-            document.getElementById('conversationDiv').style.visibility =
-                    connected ? 'visible' : 'hidden';
-            document.getElementById('response').innerHTML = '';
-        }
-
-        function connect() {
-            var socket = new SockJS('/hello.htm');
-            stompClient = Stomp.over(socket);
-            stompClient.connect({}, function(frame) {
-                setConnected(true);
-                console.log('Connected: ' + frame);
-                stompClient.subscribe('/tweet/fuck', function(greeting){
-                    showGreeting(JSON.parse(greeting.body).code+" : "+
-                            JSON.parse(greeting.body).message);
-                });
-            });
-        }
-
-        function disconnect() {
-            if (stompClient != null) {
-                stompClient.disconnect();
-            }
-            setConnected(false);
-            console.log("Disconnected");
-        }
-
-        function sendMessage() {
-            var message = document.getElementById('message').value;
-            stompClient.send("/websocket/hello", {}, JSON.stringify({ 'message': message }));
-        }
-
-        function showGreeting(message) {
-            var response = document.getElementById('response');
-            var p = document.createElement('p');
-            p.style.wordWrap = 'break-word';
-            p.appendChild(document.createTextNode(message));
-            response.appendChild(p);
-        }
-    </script>
+    <jsp:include page="layout/head.jsp"></jsp:include>
 </head>
-<body onload="disconnect()">
+<body>
+<jsp:include page="layout/nav.jsp"></jsp:include>
 <noscript>
     <h2 style="color: #ff0000">不支持的浏览器版本,丫的是不是用IE了,你这简直是摧残程序员的生命</h2>
 </noscript>
-<hr/>
 
-<p>这只是一个SpringMVC的websocket例子</p>
-
-<div>
-    <div>
-        <button id="connect" onclick="connect();">连接</button>
-        <button id="disconnect" disabled="disabled" onclick="disconnect();">
-            断开连接</button>
+    <div class="container">
+        <div class="page-header">
+        <h1 class="demo-headline">The cipher code meeting is in</h1>
+        <h4 id="time" class="demo-headline"></h4>
+        </div>
     </div>
-    <div id="conversationDiv">
-        <label>你要说什么</label><input type="text" id="message" />
-        <button id="sendMessage" onclick="sendMessage();">发送</button>
-        <p id="response"></p>
-    </div>
-</div>
-<hr/>
+<jsp:include page="layout/foot.jsp"></jsp:include>
+<script src="//cdn.bootcss.com/sockjs-client/1.1.1/sockjs.min.js"></script>
+<script src="//cdn.bootcss.com/stomp.js/2.3.3/stomp.min.js"></script>
+<script>
+    $(document).ready(function (){
+        $("#nav_home").removeClass("active");
+        $("#nav_cipher").addClass("active");
+        $("#nav_article").removeClass("active");
+        connect()
+    });
+</script>
+<script>
+    var stompClient = null;
+    function connect() {
+        var socket = new SockJS('/webSocket/hello.htm');
+        stompClient = Stomp.over(socket);
+        stompClient.connect({}, function(frame) {
+            stompClient.send('/websocket/hello');
+            console.log('Connected: ' + frame);
+            stompClient.subscribe('/subscribe/time', function(greeting){
+                console.log(greeting);
+                var message = JSON.parse(greeting.body);
+                $('#time').html(message.days +" days " + message.hours + " hours " + message.minutes + " minutes " + message.seconds + " seconds");
+            });
+        });
+    }
+</script>
 </body>
 </html>

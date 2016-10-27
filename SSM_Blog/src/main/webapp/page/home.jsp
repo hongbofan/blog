@@ -203,6 +203,7 @@
 <script>
     $(document).ready(function (){
         $("#nav_article").removeClass("active");
+        $("#nav_cipher").removeClass("active");
         $("#nav_home").addClass("active");
     });
 </script>
