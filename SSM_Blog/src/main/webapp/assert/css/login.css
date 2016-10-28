@@ -1,0 +1,82 @@
+.login-page{
+    padding: 125px 0 50px;
+    text-align: center;
+}
+.login-page .title{
+    margin: 70px auto 50px;
+    border-bottom: 1px solid #eeeeee;
+    color: #b1b1b1;
+}
+.login-page .title span{
+    position: relative;
+    top: 10px;
+    padding: 0 30px;
+    background: white;
+}
+.login-page .title b{
+    margin: 0 10px;
+}
+.login-page .logo img{
+    width: 252px;
+}
+img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+    border: 0;
+}
+h4 {
+    font-size: 17.5px;
+    font-family: inherit;
+    line-height: 20px;
+    text-rendering: optimizelegibility;
+    display: block;
+    -webkit-margin-before: 1.33em;
+    -webkit-margin-after: 1.33em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}
+.login-page .login-sns{
+    margin-left: 0;
+}
+.login-page .login-sns p{
+    margin-bottom: 15px;
+    color: #999999;
+    display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}
+.login-page .sign-in form{
+    display: block;
+}.login-page .sign-in{
+     border-bottom: 1px solid #eeeeee;
+ }
+ul{
+    padding: 0;
+    margin: 0 0 10px 25px;
+    display: block;
+    list-style-type: disc;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 40px;
+}
+.login-sns li{
+    display: inline-block;
+}
+li{
+    line-height: 20px;
+    text-align: -webkit-match-parent;
+}
+.login-page .login-sns li>a{
+    width: 44px;
+    height: 44px;
+    display: inline-block;
+    border-radius: 50%;
+    line-height: 44px;
+    font-size: 20px;
+    background: #eeeeee;
+}

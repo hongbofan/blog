@@ -18,10 +18,13 @@
 </noscript>
 
     <div class="container">
+
         <div class="page-header">
-        <h1 class="demo-headline">The cipher code meeting is in</h1>
-        <h4 id="time" class="demo-headline"></h4>
+            <h1 class="demo-headline">CIPHERS</h1>
+            <h1> Imagine <small>Discover&Explore</small></h1>
         </div>
+        <h1>The cipher code is coming soon in</h1>
+        <h4 id="time"></h4>
     </div>
 <jsp:include page="layout/foot.jsp"></jsp:include>
 <script src="//cdn.bootcss.com/sockjs-client/1.1.1/sockjs.min.js"></script>
@@ -31,7 +34,7 @@
         $("#nav_home").removeClass("active");
         $("#nav_cipher").addClass("active");
         $("#nav_article").removeClass("active");
-        connect()
+        connect();
     });
 </script>
 <script>
@@ -40,7 +43,6 @@
         var socket = new SockJS('/webSocket/hello.htm');
         stompClient = Stomp.over(socket);
         stompClient.connect({}, function(frame) {
-            stompClient.send('/websocket/hello');
             console.log('Connected: ' + frame);
             stompClient.subscribe('/subscribe/time', function(greeting){
                 console.log(greeting);
