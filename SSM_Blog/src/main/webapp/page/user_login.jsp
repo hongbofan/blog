@@ -10,8 +10,6 @@
 <head>
     <title>Title</title>
     <jsp:include page="layout/head.jsp"></jsp:include>
-    <%--<link href="../assert/css/base-00828532d00225531ad20ff45bf311ea.css" rel="stylesheet">--%>
-    <%--<link href="../assert/css/reading-8988004fd0156ba254ff10aac6b854b6.css" rel="stylesheet">--%>
     <link href="../assert/css/login.css" rel="stylesheet">
 </head>
 <body>
@@ -20,7 +18,7 @@
     <div class="login-page">
         <div class="logo"><img src="../assert/img/img_logo-25ff4bee2e56411470b83c636a7a0dad.png" alt="Img logo"></div>
         <h4 class="title">
-            <span><a>登陆</a><b>·</b><a>注册</a></span>
+            <span><a>Sign in</a><b>·</b><a>Sign up</a></span>
         </h4>
         <div class="sign-in">
             <div class="row">
@@ -41,24 +39,28 @@
             </div>
         </div>
         <div class="login-sns">
-            <p>您还可以通过以下方式直接登录</p>
-            <ul class="login-sns">
-                <li class="weibo">
-                    <a href="/users/auth/weibo"><i class="fui-search"></i></a>
-                </li>
-                <li class="qq">
-                    <a href="/users/auth/qq_connect"><i class="fui-search"></i></a>
-                </li>
-                <li class="douban">
-                    <a href="/users/auth/douban"><i class="fui-search"></i></a>
-                </li>
-                <li class="google">
-                    <a href="/users/auth/google_oauth2"><i class="fui-search"></i></a>
-                </li>
-                <li class="wechat">
-                    <a href="/users/auth/wechat"><i class="fui-search"></i></a>
-                </li>
-            </ul>
+            <p>Other ways...</p>
+            <div class="row">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
+                <ul class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <li class="weibo">
+                        <a href="#"><i class="fa fa-qq"></i></a>
+                    </li>
+                    <li class="qq">
+                        <a href="#"><i class="fa fa-weibo"></i></a>
+                    </li>
+                    <li class="douban">
+                        <a href="#"><i class="fa fa-git"></i></a>
+                    </li>
+                    <li class="google">
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li class="wechat">
+                        <a href="#"><i class="fa fa-wechat"></i></a>
+                    </li>
+                </ul>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
+            </div>
         </div>
     </div>
 </div>

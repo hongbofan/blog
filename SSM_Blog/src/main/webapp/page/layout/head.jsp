@@ -10,4 +10,5 @@
 
 <link href="../../assert/css/flat-ui.min.css" rel="stylesheet">
 <link href="../../assert/css/docs.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="shortcut icon" href="../../assert/img/favicon.ico">
