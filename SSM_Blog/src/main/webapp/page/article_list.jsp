@@ -55,6 +55,7 @@
         $("#nav_home").removeClass("active");
         $("#nav_cipher").removeClass("active");
         $("#nav_article").addClass("active");
+        $("#nav_login").removeClass("active");
         getArticleListBySearch(1);
     });
     getArticleListBySearch = function (page) {

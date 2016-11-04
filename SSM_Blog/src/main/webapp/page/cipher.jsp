@@ -34,6 +34,7 @@
         $("#nav_home").removeClass("active");
         $("#nav_cipher").addClass("active");
         $("#nav_article").removeClass("active");
+        $("#nav_login").removeClass("active");
         connect();
     });
 </script>

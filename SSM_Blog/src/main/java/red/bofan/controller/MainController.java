@@ -43,13 +43,12 @@ public class MainController extends BaseController{
                 result.put("message","欢迎你，"+ subject.getPrincipal());
             } else {
                 result.put("result",false);
-                result.put("message","密码错误");
+                result.put("message","账号或密码错误");
             }
         }catch (AuthenticationException ex){
             System.out.println("currentUser:"+request.getSession().getAttribute("currentUser"));
             result.put("result",false);
-            result.put("message","密码错误");
-            ex.printStackTrace();
+            result.put("message","账号或密码错误");
         }
         return result;
     }

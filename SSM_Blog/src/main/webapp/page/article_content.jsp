@@ -6,17 +6,31 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Title</title>
+    <jsp:include page="layout/head.jsp"></jsp:include>
     <link rel="stylesheet" href="../assert/css/style.css" />
     <link rel="stylesheet" href="../assert/css/editormd.preview.css" />
 </head>
 <body>
-    <div id="test-editormd-view2">
-        <textarea >${markdown}</textarea>
+<jsp:include page="layout/nav.jsp"></jsp:include>
+<div class="container">
+    <div class="page-header">
+        <h1 class="demo-headline" id="title">TITLE</h1>
     </div>
-<%--${html}--%>
+    <div class="row">
+        <div id="test-editormd-view2" class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+            <textarea></textarea>
+        </div>
+        <div  class="col-xs-0 col-sm-0 col-md-4 col-lg-4">
+            <div class="markdown-body editormd-preview-container" id="custom-toc-container">#custom-toc-container</div>
+        </div>
+    </div>
+    <a class="back-to-top fa fa-arrow-up" href="#top" style="position: fixed;bottom: 100px;right: 50px;">
+    </a>
+</div>
+
     <script src="../assert/js/jquery.min.js"></script>
     <script src="../assert/lib/marked.min.js"></script>
     <script src="../assert/lib/prettify.min.js"></script>
@@ -29,44 +43,26 @@
     <script src="../assert/js/editormd.min.js"></script>
 
     <script type="text/javascript">
-        $(function() {
-                    var testEditormdView, testEditormdView2;
-
-//                    $.get("test.md", function (markdown) {
-//
-//                        testEditormdView = editormd.markdownToHTML("test-editormd-view", {
-//                            markdown: markdown,//+ "\r\n" + $("#append-test").text(),
-//                            //htmlDecode      : true,       // 开启 HTML 标签解析，为了安全性，默认不开启
-//                            htmlDecode: "style,script,iframe",  // you can filter tags decode
-//                            //toc             : false,
-//                            tocm: true,    // Using [TOCM]
-//                            //tocContainer    : "#custom-toc-container", // 自定义 ToC 容器层
-//                            //gfm             : false,
-//                            //tocDropdown     : true,
-//                            // markdownSourceCode : true, // 是否保留 Markdown 源码，即是否删除保存源码的 Textarea 标签
-//                            emoji: true,
-//                            taskList: true,
-//                            tex: true,  // 默认不解析
-//                            flowChart: true,  // 默认不解析
-//                            sequenceDiagram: true,  // 默认不解析
-//                        });
-//
-//                        //console.log("返回一个 jQuery 实例 =>", testEditormdView);
-//
-//                        // 获取Markdown源码
-//                        //console.log(testEditormdView.getMarkdown());
-//
-//                        //alert(testEditormdView.getMarkdown());
-//                    });
-            testEditormdView2 = editormd.markdownToHTML("test-editormd-view2", {
-                htmlDecode      : "style,script,iframe",  // you can filter tags decode
-                emoji           : true,
-                taskList        : true,
-                tex             : true,  // 默认不解析
-                flowChart       : true,  // 默认不解析
-                sequenceDiagram : true,  // 默认不解析
-            });
+        $(document).ready(function (){
+            showArticleInfo("${id}");
         });
+        showArticleInfo=function(id){
+            $.ajax({url:"../article/"+id+".json",method:"GET",success:function(result){
+                var testEditormdView2 = editormd.markdownToHTML("test-editormd-view2", {
+                    markdown: result.article.content,
+                    htmlDecode      : "style,script,iframe",  // you can filter tags decode
+                    toc             : true,
+                    tocContainer    : "#custom-toc-container",
+                    tocm            : true,
+                    emoji           : false,
+                    taskList        : true,
+                    tex             : true,  // 默认不解析
+                    flowChart       : true,  // 默认不解析
+                    sequenceDiagram : true,  // 默认不解析
+                });
+                $("#title").text(result.article.title);
+            }});
+        };
     </script>
 </body>
 </html>

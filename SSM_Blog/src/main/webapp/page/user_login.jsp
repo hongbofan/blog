@@ -22,27 +22,27 @@
         </h4>
         <div class="sign-in">
             <div class="row">
-                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
-                <form class="login-form col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <div class="col-xs-1 col-sm-3 col-md-3 col-lg-4"></div>
+                <form class="login-form col-xs-10 col-sm-6 col-md-6 col-lg-4">
                     <div class="form-group">
-                        <input type="text" class="form-control login-field " value="" placeholder="Enter your name" id="login-name">
+                        <input  type="text" class="form-control login-field " value="" placeholder="Enter your name" id="login-name">
                         <label class="login-field-icon fui-user" for="login-name"></label>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control login-field" value="" placeholder="Password" id="login-pass">
+                        <input  type="password" class="form-control login-field" value="" placeholder="Password" id="login-pass">
                         <label class="login-field-icon fui-lock" for="login-pass"></label>
                     </div>
-                    <a class="btn btn-primary btn-lg btn-block" href="#">Log in</a>
+                    <a class="btn btn-primary btn-lg btn-block" onclick="UserLogin()">Log in</a>
                     <a class="login-link" href="#">Lost your password?</a>
                 </form>
-                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
+                <div class="col-xs-1 col-sm-3 col-md-3 col-lg-4"></div>
             </div>
         </div>
         <div class="login-sns">
             <p>Other ways...</p>
             <div class="row">
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
-                <ul class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <div class="col-xs-1 col-sm-1 col-md-4 col-lg-4"></div>
+                <ul class="col-xs-10 col-sm-10 col-md-4 col-lg-4">
                     <li class="weibo">
                         <a href="#"><i class="fa fa-qq"></i></a>
                     </li>
@@ -59,13 +59,19 @@
                         <a href="#"><i class="fa fa-wechat"></i></a>
                     </li>
                 </ul>
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
+                <div class="col-xs-1 col-sm-1 col-md-4 col-lg-4"></div>
             </div>
         </div>
     </div>
 </div>
     <jsp:include page="layout/foot.jsp"></jsp:include>
 <script>
+    $(document).ready(function () {
+        $("#nav_home").removeClass("active");
+        $("#nav_login").addClass("active");
+        $("#nav_cipher").removeClass("active");
+        $("#nav_article").removeClass("active");
+    });
     UserLogin=function(){
         $.ajax({
             url : "../login.do",
@@ -76,9 +82,9 @@
             },
             success : function(data){
                 if(data.result == true){
-                    window.location.h    = "/home.htm";
+                    window.location.href = "/home.htm";
                 }else{
-                    alert("账号或密码错误!")
+                    alert(data.message);
                     //用户没有登录的时候
                     //$("#nav-user-info").remove();
                 }

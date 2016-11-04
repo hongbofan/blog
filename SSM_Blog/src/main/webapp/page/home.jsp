@@ -22,7 +22,7 @@
     <p>1</p>
     <p>1</p>
     <p>
-        <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">Contact Me &raquo;</a>
+        <a class="btn btn-lg btn-primary" data-toggle="modal" data-target=".modal_QRCode" role="button">Contact Me &raquo;</a>
     </p>
     <span class="fa fa-firefox "></span>
     <span class="fa fa-chrome "></span>
@@ -209,12 +209,29 @@
         <%--</ul>--%>
     <%--</div>--%>
 </div>
+<div class="modal fade modal_QRCode" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4> WeChat QRCode </h4>
+            </div>
+            <div class="modal-body">
+                <img src="../assert/img/QRCode.jpg" class="img-responsive"/>
+            </div>
+            <div class="modal-footer">
+                <div>You'd better use WeChat browser</div>
+            </div>
+        </div>
+    </div>
+</div>
 <jsp:include page="layout/foot.jsp"></jsp:include>
 <script>
     $(document).ready(function (){
         $("#nav_article").removeClass("active");
         $("#nav_cipher").removeClass("active");
         $("#nav_home").addClass("active");
+        $("#nav_login").removeClass("active");
     });
 </script>
 <script type="text/javascript">

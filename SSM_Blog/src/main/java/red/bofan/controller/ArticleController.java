@@ -1,15 +1,19 @@
 package red.bofan.controller;
 
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import red.bofan.model.Article;
+import red.bofan.model.User;
 import red.bofan.service.ArticleService;
 import red.bofan.util.PaginationVo;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -20,41 +24,39 @@ import java.util.UUID;
 @Controller
 @RequestMapping("/article")
 public class ArticleController extends BaseController{
-    @Autowired
-    private ArticleService articleService;
+
 
     /**
      * 文章提交
      * @param markdown
      * @param html
-     * @param attr
      * @return
      */
     @RequestMapping(value = "/upload.do", method = RequestMethod.POST)
-    public String upload(@RequestParam(value = "test-editormd-markdown-doc", required = false) String markdown,
-                         @RequestParam(value = "test-editormd-html-code", required = false) String html,
-                         RedirectAttributes attr) {
-        System.out.println(markdown);
-        System.out.println(html);
-        attr.addFlashAttribute("html", html);
-        attr.addFlashAttribute("markdown", markdown);
+    public ModelAndView  upload(@RequestParam(value = "test-editormd-markdown-doc", required = false) String markdown,
+                         @RequestParam(value = "test-editormd-html-code", required = false) String html) {
         String id = UUID.randomUUID().toString();
         Article article = new Article();
         article.setId(id);
         article.setContent(markdown);
-        article.setTitle("test");
-        article.setUserId("1");
-        System.out.println(articleService.insertSelective(article));
-        return "redirect:showContent.do";
-
-    }
-    @RequestMapping(value = "/showContent.do", method = RequestMethod.GET)
-    public String showContent(ModelMap map, RedirectAttributes attr) {
-        System.out.println("attr=" + attr.getFlashAttributes().get("html"));
-
-        PaginationVo<Article> paginationVo = articleService.selectByPageWithSearch(1, 2, "");
-        paginationVo.getList().forEach(e -> System.out.println(e.getTitle()));
-        return "article_content";
+        article.setTitle("markdownTest");
+        String principal = SecurityUtils.getSubject().getPrincipal().toString();
+        //姓名获取用户id验证
+        try{
+            User currentUser = userService.selectByName(principal);
+            article.setUserId(currentUser.getId());
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return new ModelAndView("article_editor","err_msg","invalid user");
+        }
+        //插入文章验证
+        try{
+            System.out.println(articleService.insertSelective(article));
+            return new ModelAndView("article_editor");
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return new ModelAndView("article_editor","err_msg","failed to insert article");
+        }
     }
 
     @ResponseBody
@@ -69,7 +71,7 @@ public class ArticleController extends BaseController{
     @RequestMapping(value = "/{id}.htm", method = RequestMethod.GET)
     public String getSingle(@PathVariable(value = "id") String id, Model model) {
         model.addAttribute("id", id);
-        return "article";
+        return "article_content";
     }
 
     @ResponseBody

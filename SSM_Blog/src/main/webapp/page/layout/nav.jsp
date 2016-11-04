@@ -10,7 +10,7 @@
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collap se" data-target=".navbar-collapse">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
             </button>
             <a class="navbar-brand" href="javascript:void(0)">HONGBOFAN<i class="fa fa-mars-stroke-v"></i></a>
@@ -22,7 +22,7 @@
                 <li id="nav_cipher"><a href="/cipher/index.htm" >Cipher</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/user_login.htm" id="nav-login-link">Login</a></li>
+                <li id="nav_login"><a href="/user_login.htm" id="nav-login-link">Login</a></li>
                 <li class="dropdown">
                     <a href="javascript:void(0);" id="nav-user-info" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
