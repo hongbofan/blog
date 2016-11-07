@@ -32,12 +32,14 @@ public class ArticleController extends BaseController{
      * @param html
      * @return
      */
+    @ResponseBody
     @RequestMapping(value = "/upload.do", method = RequestMethod.POST)
-    public ModelAndView  upload(@RequestParam(value = "test-editormd-markdown-doc", required = false) String markdown,
+    public Map<String, Object>  upload(@RequestParam(value = "test-editormd-markdown-doc", required = false) String markdown,
                          @RequestParam(value = "test-editormd-html-code", required = false) String html) {
+        Map<String,Object> result = new HashMap<>();
         String id = UUID.randomUUID().toString();
         Article article = new Article();
-        article.setId(id);
+        //article.setId(id);
         article.setContent(markdown);
         article.setTitle("markdownTest");
         String principal = SecurityUtils.getSubject().getPrincipal().toString();
@@ -47,15 +49,20 @@ public class ArticleController extends BaseController{
             article.setUserId(currentUser.getId());
         }catch (Exception e){
             System.out.println(e.getMessage());
-            return new ModelAndView("article_editor","err_msg","invalid user");
+            result.put("status","0");
+            result.put("err_msg","invalid user");
+            return result;
         }
         //插入文章验证
         try{
             System.out.println(articleService.insertSelective(article));
-            return new ModelAndView("article_editor");
+            result.put("status","1");
+            return result;
         }catch (Exception e){
             System.out.println(e.getMessage());
-            return new ModelAndView("article_editor","err_msg","failed to insert article");
+            result.put("status","0");
+            result.put("err_msg","failed to insert article");
+            return result;
         }
     }
 
