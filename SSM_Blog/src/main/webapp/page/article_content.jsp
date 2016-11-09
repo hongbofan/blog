@@ -23,15 +23,14 @@
         <div id="test-editormd-view2" class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
             <textarea></textarea>
         </div>
-        <div  class="col-xs-0 col-sm-0 col-md-4 col-lg-4">
+        <div  class="hidden-xs hidden-sm col-md-4 col-lg-4">
             <div class="markdown-body editormd-preview-container" id="custom-toc-container">#custom-toc-container</div>
         </div>
     </div>
     <a class="back-to-top fa fa-arrow-up" href="#top" style="position: fixed;bottom: 100px;right: 50px;">
     </a>
 </div>
-
-    <script src="../assert/js/jquery.min.js"></script>
+<jsp:include page="layout/foot.jsp"></jsp:include>
     <script src="../assert/lib/marked.min.js"></script>
     <script src="../assert/lib/prettify.min.js"></script>
 
@@ -44,6 +43,10 @@
 
     <script type="text/javascript">
         $(document).ready(function (){
+            $("#nav_home").removeClass("active");
+            $("#nav_cipher").removeClass("active");
+            $("#nav_article").addClass("active");
+            $("#nav_login").removeClass("active");
             showArticleInfo("${id}");
         });
         showArticleInfo=function(id){

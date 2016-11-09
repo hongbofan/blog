@@ -83,11 +83,11 @@ public class ArticleController extends BaseController{
 
     @ResponseBody
     @RequestMapping(value = "/list.json", method = RequestMethod.GET)
-    public Map list(@RequestParam(value = "p", defaultValue = "1") Integer p) {
+    public Map list(@RequestParam(value = "p", defaultValue = "1") Integer p,
+                    @RequestParam(value = "title", defaultValue = "") String title) {
         Map<String, Object> result = new HashMap<>();
-        PaginationVo<Article> paginationVo = articleService.selectByPageWithSearch(p, 8, "");
+        PaginationVo<Article> paginationVo = articleService.selectByPageWithSearch(p, 8, title);
         result.put("articles", paginationVo.getList());
-        System.out.println(paginationVo.getPageNum());
         result.put("pageInfo", paginationVo);
         return result;
     }

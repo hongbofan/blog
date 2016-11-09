@@ -28,7 +28,7 @@ public class ArticleService {
         pageVo.setCount(articleMapper.selectCountBySearch(title));
         pageVo.setRows(pagesize);
         pageVo.setPageNum(pagenum);
-        pageVo.setList(articleMapper.selectByPageWithSearch(pageVo.getOffset(), pageVo.getRows(),title));
+        pageVo.setList(articleMapper.selectByPageWithSearch(title,pageVo.getOffset(), pageVo.getRows()));
         return pageVo;
     }
 }

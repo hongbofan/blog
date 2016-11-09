@@ -10,11 +10,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
     <jsp:include page="layout/head.jsp"></jsp:include>
-
-    <%--<link rel="stylesheet" type="text/css" href="../assert/css/normalize.css" />--%>
-    <%--<link rel="stylesheet" type="text/css" href="../assert/css/demo.css" />--%>
     <link rel="stylesheet" type="text/css" href="../assert/css/component.css" />
 </head>
 <body>
@@ -32,9 +28,9 @@
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Title Search" id="search-query-3">
+                        <input type="text" class="form-control" placeholder="Title Search" id="search_input">
                         <span class="input-group-btn">
-                    <button type="submit" class="btn"><span class="fui-search"></span></button>
+                    <button type="submit" class="btn" onclick="getArticleListBySearch(1)" id="search_button"><span class="fui-search"></span></button>
                     </span>
                 </div>
                 </div>
@@ -57,10 +53,17 @@
         $("#nav_article").addClass("active");
         $("#nav_login").removeClass("active");
         getArticleListBySearch(1);
+        $('#search_input').bind('keyup', function(event) {
+            if (event.keyCode == "13") {
+                //回车执行查询
+                $('#search_button').click();
+            }
+        });
     });
     getArticleListBySearch = function (page) {
+        var title = $("#search_input").val();
         $.ajax({
-            url: "../article/list.json?p=" + page, type: "GET", success: function (result) {
+            url: "../article/list.json?p=" + page +"&title=" + title, type: "GET", success: function (result) {
                 var articleListTemplate = _.template($("#article-list-template").html(), {list: result.pageInfo.list});
                 $("#article-list-box").html(articleListTemplate);
                 init();

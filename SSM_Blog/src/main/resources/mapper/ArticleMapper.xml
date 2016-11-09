@@ -24,12 +24,12 @@
   <select id="selectCountBySearch" resultType="java.lang.Integer" parameterType="java.lang.Object">
     SELECT COUNT(*) FROM article
     WHERE TRUE
-    <if test="title!=''">AND title = #{title,jdbcType=VARCHAR}</if>
+    <if test="title!=''">AND title LIKE "%"#{title,jdbcType=VARCHAR}"%"</if>
   </select>
   <select id="selectByPageWithSearch" resultMap="BaseResultMap" parameterType="java.lang.Object" >
     select <include refid="Base_Column_List" /> from article
     WHERE TRUE
-    <if test="title!=''">AND title LIKE #{title,jdbcType=VARCHAR}</if>
+    <if test="title!=''">AND title LIKE "%"#{title,jdbcType=VARCHAR}"%"</if>
     limit #{startrow,jdbcType=INTEGER},#{rows,jdbcType=INTEGER}
   </select>
   <insert id="insertSelective" parameterType="red.bofan.model.Article" >

@@ -7,8 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-    <title>Title</title>
+<head
     <jsp:include page="layout/head.jsp"></jsp:include>
     <link href="../assert/css/home.css" rel="stylesheet">
 </head>
