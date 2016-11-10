@@ -1,6 +1,9 @@
 package red.bofan.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import red.bofan.dao.ArticleMapper;
 import red.bofan.model.Article;
@@ -13,14 +16,15 @@ import red.bofan.util.PaginationVo;
 public class ArticleService {
     @Autowired
     private ArticleMapper articleMapper;
-
+    @CacheEvict(value="cache4jds",key="'selectByPrimaryKey('+#id+')'")
     public Article selectByPrimaryKey(String id){
         return articleMapper.selectByPrimaryKey(id);
     }
+    @CachePut(value = "cache4jds",key = "'insertSelective('+#article.id+')'")
     public int insertSelective(Article article){
         return articleMapper.insertSelective(article);
     }
-
+    @Cacheable(value = "cache4jds",key="'selectByPageWithSearch('+#pagenum+','+#pagesize+','+#title+')'")
     public PaginationVo<Article> selectByPageWithSearch(int pagenum,int pagesize,String title){
         //int pagenum是当前的页码,int pagesize是每页显示的数据数量
         PaginationVo<Article> pageVo=new PaginationVo<Article>();

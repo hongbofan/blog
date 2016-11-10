@@ -1,9 +1,10 @@
 package red.bofan.util;
 
 
+import java.io.Serializable;
 import java.util.List;
 
-public class PaginationVo<T> {
+public class PaginationVo<T> implements Serializable{
 
 	//页码
 	private int pageNum;

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+    <!-- 自动扫描注解的bean -->
+    <context:component-scan base-package="red.bofan.util" />
+    <!-- properties file -->
+    <context:property-placeholder location="classpath:redis.properties" />
+    <cache:annotation-driven />
+    <bean class="redis.clients.jedis.JedisPoolConfig" id="jedisPoolConfig">
+        <property value="${redis.pool.maxIdle}" name="maxIdle"/>
+        <!--最大能够保持idel状态的对象数-->
+        <property value="${redis.pool.maxTotal}" name="maxTotal"/>
+        <!--最大分配的对象数-->
+        <property value="${redis.pool.maxWaitMillis}" name="maxWaitMillis"/>
+        <property value="${redis.pool.testOnBorrow}" name="testOnBorrow"/>
+        <!--当调用borrow Oject方法时，是否进行有效性检查-->
+    </bean>
+
+
+    <bean class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" id="connectionFactory">
+        <property name="poolConfig" ref="jedisPoolConfig" />
+        <property name="port" value="${redis.port}" />
+        <property name="hostName" value="${redis.host}" />
+    </bean>
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate" >
+        <property name="connectionFactory" ref="connectionFactory" />
+        <property name="keySerializer" >
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+        </property>
+        <property name="valueSerializer" >
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+        </property>
+        <property name="hashKeySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="hashValueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+        </property>
+    </bean>
+    <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
+        <property name="caches">
+            <set>
+                 <bean class="red.bofan.util.JedisCache">
+                    <property name="redisTemplate" ref="redisTemplate" />
+                    <property name="name" value="cache4jds"/>
+                    <!-- common名称要在类或方法的注解中使用 -->
+                </bean>
+            </set>
+        </property>
+    </bean>
+</beans>

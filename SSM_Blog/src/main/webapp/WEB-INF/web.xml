@@ -6,11 +6,13 @@
 
   <display-name>Archetype Created Web Application</display-name>
 
-  <!--    &lt;!&ndash; 读取spring配置文件 -->
+  <!--  读取spring配置文件 -->
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>
       classpath:spring/spring-dao.xml
+      classpath:spring/spring-service.xml
+      classpath:spring/spring-redis.xml
       classpath:spring/spring-shiro.xml
     </param-value>
   </context-param>

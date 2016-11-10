@@ -16,10 +16,10 @@
         <!-- ref对应我们写的realm  MyShiro -->
         <property name="realm" ref="myShiro"/>
         <!-- 使用下面配置的缓存管理器 -->
-        <property name="cacheManager" ref="cacheManager"/>
+        <!--<property name="cacheManager" ref="cacheManager"/>-->
     </bean>
     <bean id="myShiro" class="red.bofan.util.myShiro"></bean>
-    <bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />
+    <!--<bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />-->
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
     <!--
        Shiro主过滤器本身功能十分强大，其强大之处就在于它支持任何基于URL路径表达式的、自定义的过滤器的执行
