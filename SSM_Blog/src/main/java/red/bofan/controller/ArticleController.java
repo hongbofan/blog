@@ -44,7 +44,7 @@ public class ArticleController extends BaseController{
         article.setId(id);
         article.setContent(markdown);
         article.setTitle(title);
-        article.setLastdate(new Date());
+        article.setLastDate(new Date());
         String principal = SecurityUtils.getSubject().getPrincipal().toString();
         //姓名获取用户id验证
         try{

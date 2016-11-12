@@ -30,9 +30,9 @@
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Title Search" id="search_input">
                         <span class="input-group-btn">
-                    <button type="submit" class="btn" onclick="getArticleListBySearch(1)" id="search_button"><span class="fui-search"></span></button>
-                    </span>
-                </div>
+                            <button type="submit" class="btn" onclick="getArticleListBySearch(1)" id="search_button"><span class="fui-search"></span></button>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -105,7 +105,7 @@
             <svg viewBox="0 0 180 320" preserveAspectRatio="none"><path d="M 0 0 L 0 182 L 90 126.5 L 180 182 L 180 0 L 0 0 z "/></svg>
             <figcaption>
                 <h2>{%= list[article]['title'] %}</h2>
-                <p>Soko radicchio bunya nuts gram dulse.</p>
+                <p></p>
             </figcaption>
         </figure>
     </a>

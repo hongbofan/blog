@@ -16,7 +16,7 @@ import red.bofan.util.PaginationVo;
 public class ArticleService {
     @Autowired
     private ArticleMapper articleMapper;
-    @CacheEvict(value="cache4jds",key="'selectByPrimaryKey('+#id+')'")
+    @Cacheable(value = "cache4jds",key="'selectByPrimaryKey('+#id+')'")
     public Article selectByPrimaryKey(String id){
         return articleMapper.selectByPrimaryKey(id);
     }

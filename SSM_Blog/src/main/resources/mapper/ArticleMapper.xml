@@ -9,9 +9,9 @@
     <constructor >
       <idArg column="id" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="title" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="content" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="lastDate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="user_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="lastDate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="content" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
@@ -26,6 +26,10 @@
     SELECT COUNT(*) FROM article
     WHERE TRUE
     <if test="title!=''">AND title LIKE "%"#{title,jdbcType=VARCHAR}"%"</if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT <include refid="Base_Column_List"/> FROM  article
+    WHERE id = #{id,jdbcType=VARCHAR}
   </select>
   <select id="selectByPageWithSearch" resultMap="BaseResultMap" parameterType="java.lang.Object" >
     select <include refid="Base_Column_List" /> from article
@@ -51,7 +55,7 @@
       <if test="userId != null" >
         user_id,
       </if>
-      <if test="lastdate != null" >
+      <if test="lastDate != null" >
         lastDate,
       </if>
       <if test="content != null" >
@@ -68,8 +72,8 @@
       <if test="userId != null" >
         #{userId,jdbcType=VARCHAR},
       </if>
-      <if test="lastdate != null" >
-        #{lastdate,jdbcType=TIMESTAMP},
+      <if test="lastDate != null" >
+        #{lastDate,jdbcType=TIMESTAMP},
       </if>
       <if test="content != null" >
         #{content,jdbcType=LONGVARCHAR},
@@ -89,8 +93,8 @@
       <if test="userId != null" >
         user_id = #{userId,jdbcType=VARCHAR},
       </if>
-      <if test="lastdate != null" >
-        lastDate = #{lastdate,jdbcType=TIMESTAMP},
+      <if test="lastDate != null" >
+        lastDate = #{lastDate,jdbcType=TIMESTAMP},
       </if>
       <if test="content != null" >
         content = #{content,jdbcType=LONGVARCHAR},

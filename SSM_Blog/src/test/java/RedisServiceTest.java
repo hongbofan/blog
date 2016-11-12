@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * Created by hongbofan on 2016/11/10.
  */
-public class RedisServiceTest extends baseTest {
+public class RedisServiceTest extends BaseTest {
     @Autowired
     private RedisTemplate redisTemplate;
     @Autowired

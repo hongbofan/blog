@@ -51,13 +51,6 @@ public interface ArticleMapper {
      *
      * @mbggenerated
      */
-    @Select({
-        "select",
-        "id, title, content, user_id",
-        "from article",
-        "where id = #{id,jdbcType=VARCHAR}"
-    })
-    @ResultMap("BaseResultMap")
     Article selectByPrimaryKey(String id);
 
     /**
@@ -79,6 +72,7 @@ public interface ArticleMapper {
         "set title = #{title,jdbcType=VARCHAR},",
           "content = #{content,jdbcType=VARCHAR},",
           "user_id = #{userId,jdbcType=VARCHAR}",
+            "lastDate = #{lastDate,jdbcType=VARCHAR}",
         "where id = #{id,jdbcType=VARCHAR}"
     })
     int updateByPrimaryKey(Article record);
