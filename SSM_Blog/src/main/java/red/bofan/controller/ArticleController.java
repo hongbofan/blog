@@ -14,6 +14,7 @@ import red.bofan.service.ArticleService;
 import red.bofan.util.PaginationVo;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -35,13 +36,15 @@ public class ArticleController extends BaseController{
     @ResponseBody
     @RequestMapping(value = "/upload.do", method = RequestMethod.POST)
     public Map<String, Object>  upload(@RequestParam(value = "test-editormd-markdown-doc", required = false) String markdown,
-                         @RequestParam(value = "test-editormd-html-code", required = false) String html) {
+                                        @RequestParam(value = "test-editormd-html-code", required = false) String html,
+                                       @RequestParam(value = "title",required = false)String title) {
         Map<String,Object> result = new HashMap<>();
         String id = UUID.randomUUID().toString();
         Article article = new Article();
-        //article.setId(id);
+        article.setId(id);
         article.setContent(markdown);
-        article.setTitle("markdownTest");
+        article.setTitle(title);
+        article.setLastdate(new Date());
         String principal = SecurityUtils.getSubject().getPrincipal().toString();
         //姓名获取用户id验证
         try{

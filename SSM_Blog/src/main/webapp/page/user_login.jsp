@@ -31,7 +31,7 @@
                         <input  type="password" class="form-control login-field" value="" placeholder="Password" id="login-pass">
                         <label class="login-field-icon fui-lock" for="login-pass"></label>
                     </div>
-                    <a class="btn btn-primary btn-lg btn-block" onclick="UserLogin()">Log in</a>
+                    <a class="btn btn-primary btn-lg btn-block" onclick="UserLogin()" id="loginA">Log in</a>
                     <a class="login-link" href="#">Lost your password?</a>
                 </form>
                 <div class="col-xs-1 col-sm-3 col-md-3 col-lg-4"></div>
@@ -70,6 +70,12 @@
         $("#nav_login").addClass("active");
         $("#nav_cipher").removeClass("active");
         $("#nav_article").removeClass("active");
+        $('#login-pass').bind('keyup', function(event) {
+            if (event.keyCode == "13") {
+                //回车执行查询
+                $('#loginA').click();
+            }
+        });
     });
     UserLogin=function(){
         $.ajax({

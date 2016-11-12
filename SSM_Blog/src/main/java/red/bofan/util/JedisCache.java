@@ -12,6 +12,8 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.concurrent.Callable;
 
 public class JedisCache implements Cache {
@@ -76,12 +78,23 @@ public class JedisCache implements Cache {
         final String keyf = key.toString();
         final Object valuef = value;
         final long liveTime = 86400;
+        Set<String> set = redisTemplate.keys("selectByPageWithSearch*");
+        Iterator<String> it = set.iterator();
         redisTemplate.execute(new RedisCallback<Long>() {
             public Long doInRedis(RedisConnection connection)
                     throws DataAccessException {
                 byte[] keyb = keyf.getBytes();
                 byte[] valueb = toByteArray(valuef);
-                connection.set(keyb, valueb);
+                if("selectByPageWithSearch".equals(keyf)){
+                    while(it.hasNext()){
+                        String keyStr = it.next();
+                        System.out.println(keyStr);
+                        connection.del(keyStr.getBytes());
+                    }
+                }else {
+                    connection.set(keyb, valueb);
+                }
+
                 if (liveTime > 0) {
                     connection.expire(keyb, liveTime);
                 }

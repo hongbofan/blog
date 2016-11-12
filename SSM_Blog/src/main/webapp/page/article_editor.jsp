@@ -18,6 +18,7 @@
 
 <div class="alert alert-danger" role="alert"  id="err_msg" style="margin-top: 60px;visibility: hidden" ></div>
 <form>
+    <input id="title" placeholder="title">
     <div class="editormd" id="test-editormd">
         <textarea class="editormd-markdown-textarea" name="test-editormd-markdown-doc" id="test-editormd-markdown-doc"></textarea>
         <!-- 第二个隐藏文本域，用来构造生成的HTML代码，方便表单POST提交，这里的name可以任意取，后台接受时以这个name键为准 -->

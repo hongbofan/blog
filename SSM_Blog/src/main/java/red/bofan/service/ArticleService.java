@@ -20,7 +20,7 @@ public class ArticleService {
     public Article selectByPrimaryKey(String id){
         return articleMapper.selectByPrimaryKey(id);
     }
-    @CachePut(value = "cache4jds",key = "'insertSelective('+#article.id+')'")
+    @CachePut(value = "cache4jds",key = "'selectByPageWithSearch'")
     public int insertSelective(Article article){
         return articleMapper.insertSelective(article);
     }
