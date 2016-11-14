@@ -51,19 +51,24 @@
         });
         showArticleInfo=function(id){
             $.ajax({url:"../article/"+id+".json",method:"GET",success:function(result){
-                var testEditormdView2 = editormd.markdownToHTML("test-editormd-view2", {
-                    markdown: result.article.content,
-                    htmlDecode      : "style,script,iframe",  // you can filter tags decode
-                    toc             : true,
-                    tocContainer    : "#custom-toc-container",
-                    tocm            : true,
-                    emoji           : false,
-                    taskList        : true,
-                    tex             : true,  // 默认不解析
-                    flowChart       : true,  // 默认不解析
-                    sequenceDiagram : true,  // 默认不解析
-                });
-                $("#title").text(result.article.title);
+                if (result.code == 200){
+                    var testEditormdView2 = editormd.markdownToHTML("test-editormd-view2", {
+                        markdown: result.data.content,
+                        htmlDecode      : "style,script,iframe",  // you can filter tags decode
+                        toc             : true,
+                        tocContainer    : "#custom-toc-container",
+                        tocm            : true,
+                        emoji           : false,
+                        taskList        : true,
+                        tex             : true,  // 默认不解析
+                        flowChart       : true,  // 默认不解析
+                        sequenceDiagram : true,  // 默认不解析
+                    });
+                    $("#title").text(result.data.title);
+                }else {
+                    alert(result.msg);
+                }
+
             }});
         };
     </script>

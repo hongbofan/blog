@@ -85,13 +85,11 @@
                 username : $("#login-name").val(),
                 password : $("#login-pass").val()
             },
-            success : function(data){
-                if(data.result == true){
+            success : function(result){
+                if(result.code == 200){
                     window.location.href = "/home.htm";
                 }else{
-                    alert(data.message);
-                    //用户没有登录的时候
-                    //$("#nav-user-info").remove();
+                    alert(result.msg);
                 }
             }
         });

@@ -64,14 +64,20 @@
         var title = $("#search_input").val();
         $.ajax({
             url: "../article/list.json?p=" + page +"&title=" + title, type: "GET", success: function (result) {
-                var articleListTemplate = _.template($("#article-list-template").html(), {list: result.pageInfo.list});
-                $("#article-list-box").html(articleListTemplate);
-                init();
-                var paginationTemplate = _.template($("#pagination-template").html(), {
-                    pageCount: result.pageInfo.pageCount,
-                    pagenum: result.pageInfo.pageNum
-                });
-                $("#pagination-box").html(paginationTemplate);
+                if (result.code == 200){
+                    var data = result.data
+                    var articleListTemplate = _.template($("#article-list-template").html(), {list: data.pageInfo.list});
+                    $("#article-list-box").html(articleListTemplate);
+                    init();
+                    var paginationTemplate = _.template($("#pagination-template").html(), {
+                        pageCount: data.pageInfo.pageCount,
+                        pagenum: data.pageInfo.pageNum
+                    });
+                    $("#pagination-box").html(paginationTemplate);
+                }else {
+                    alert(result.msg);
+                }
+
             }
         });
     };

@@ -11,6 +11,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import red.bofan.model.Article;
 import red.bofan.model.User;
 import red.bofan.service.ArticleService;
+import red.bofan.util.HttpCode;
+import red.bofan.util.JsonVo;
 import red.bofan.util.PaginationVo;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,10 +37,9 @@ public class ArticleController extends BaseController{
      */
     @ResponseBody
     @RequestMapping(value = "/upload.do", method = RequestMethod.POST)
-    public Map<String, Object>  upload(@RequestParam(value = "test-editormd-markdown-doc", required = false) String markdown,
-                                        @RequestParam(value = "test-editormd-html-code", required = false) String html,
-                                       @RequestParam(value = "title",required = false)String title) {
-        Map<String,Object> result = new HashMap<>();
+    public JsonVo upload(@RequestParam(value = "test-editormd-markdown-doc", required = false) String markdown,
+                         @RequestParam(value = "test-editormd-html-code", required = false) String html,
+                         @RequestParam(value = "title",required = false)String title) {
         String id = UUID.randomUUID().toString();
         Article article = new Article();
         article.setId(id);
@@ -52,47 +53,50 @@ public class ArticleController extends BaseController{
             article.setUserId(currentUser.getId());
         }catch (Exception e){
             System.out.println(e.getMessage());
-            result.put("status","0");
-            result.put("err_msg","invalid user");
-            return result;
+            return getJsonVo("invalid user",HttpCode.USER_GET_ERROR);
         }
         //插入文章验证
         try{
             System.out.println(articleService.insertSelective(article));
-            result.put("status","1");
-            return result;
+            return getJsonVo("success",HttpCode.OK);
         }catch (Exception e){
             System.out.println(e.getMessage());
-            result.put("status","0");
-            result.put("err_msg","failed to insert article");
-            return result;
+            return getJsonVo("failed to insert article",HttpCode.ARTICLE_INSERT_ERROR);
         }
     }
 
     @ResponseBody
     @RequestMapping(value = "/{id}.json", method = RequestMethod.GET)
-    public Map<String, Object> getSingle(@PathVariable("id") String id) {
-        Map<String, Object> result = new HashMap<>();
-        Article article = articleService.selectByPrimaryKey(id);
-        result.put("article", article);
-        return result;
+    public JsonVo getSingle(@PathVariable("id") String id) {
+        try{
+            Article article = articleService.selectByPrimaryKey(id);
+            return getJsonVo("success",HttpCode.OK,article);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return getJsonVo("failed to select article",HttpCode.ARTICLE_SELECT_ERROR);
+        }
     }
+    @ResponseBody
+    @RequestMapping(value = "/list.json", method = RequestMethod.GET)
+    public JsonVo list(@RequestParam(value = "p", defaultValue = "1") Integer p,
+                    @RequestParam(value = "title", defaultValue = "") String title) {
+        try {
+            PaginationVo<Article> paginationVo = articleService.selectByPageWithSearch(p, 8, title);
+            Map<String, Object> result = new HashMap<>();
+            result.put("articles", paginationVo.getList());
+            result.put("pageInfo", paginationVo);
+            return getJsonVo("success",HttpCode.OK,result);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return getJsonVo("failed to list article",HttpCode.ARTICLE_LIST_ERROR);
+        }
+    }
+
 
     @RequestMapping(value = "/{id}.htm", method = RequestMethod.GET)
     public String getSingle(@PathVariable(value = "id") String id, Model model) {
         model.addAttribute("id", id);
         return "article_content";
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/list.json", method = RequestMethod.GET)
-    public Map list(@RequestParam(value = "p", defaultValue = "1") Integer p,
-                    @RequestParam(value = "title", defaultValue = "") String title) {
-        Map<String, Object> result = new HashMap<>();
-        PaginationVo<Article> paginationVo = articleService.selectByPageWithSearch(p, 8, title);
-        result.put("articles", paginationVo.getList());
-        result.put("pageInfo", paginationVo);
-        return result;
     }
     @RequestMapping(value = "/list.htm", method = RequestMethod.GET)
     public String list() {
@@ -102,4 +106,6 @@ public class ArticleController extends BaseController{
     public String editor() {
         return "article_editor";
     }
+
+
 }

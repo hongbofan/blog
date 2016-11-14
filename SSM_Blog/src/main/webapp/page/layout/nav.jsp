@@ -38,8 +38,13 @@
         $.ajax({
             url : "../logout.do",
             method : "get",
-            success : function(data){
-                window.location.reload();
+            success : function(result){
+                if (result.code == 200){
+                    window.location.reload();
+                }else {
+                    alert(result.msg);
+                }
+
             }
         });
     };
@@ -47,16 +52,17 @@
         $.ajax({
             url : "../check.do",
             method : "get",
-            success : function(data){
-                if(data.result == true){
+            success : function(result){
+                if(result.code == 200){
                     //用户已经登录的情况
                     $("#nav-login-link").remove();
-                    $("#nav-user-info").html(data.username);
+                    $("#nav-user-info").html(result.data.name);
 //                    $("#person-center-link").attr("href","../users/"+data.userId+".htm");
 //                    userId = data.userId;
                 }else{
                     //用户没有登录的时候
                     $("#nav-user-info").remove();
+                    alert(result.msg);
                 }
             }
         });

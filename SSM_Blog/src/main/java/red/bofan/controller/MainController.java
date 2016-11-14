@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import red.bofan.model.User;
+import red.bofan.util.HttpCode;
+import red.bofan.util.JsonVo;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -29,54 +31,50 @@ public class MainController extends BaseController{
     //登录方法
     @RequestMapping(value = "login.do" ,method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,Object> login(@RequestParam("username")String username,
-                                    @RequestParam("password")String password,
-                                    HttpServletRequest request){
-        Map<String,Object> result = new HashMap<>();
+    public JsonVo login(@RequestParam("username")String username,
+                        @RequestParam("password")String password,
+                        HttpServletRequest request){
         try {
             Subject subject = SecurityUtils.getSubject();
             System.out.println(BCrypt.hashpw(password, BCrypt.gensalt()));
             subject.login(new UsernamePasswordToken(username, password));
             if (subject.isAuthenticated()) {
                 this.setSession("currentUser",subject.getPrincipal());
-                result.put("result",true);
-                result.put("message","欢迎你，"+ subject.getPrincipal());
+                return getJsonVo("success", HttpCode.OK);
             } else {
-                result.put("result",false);
-                result.put("message","账号或密码错误");
+                return getJsonVo("failed to login", HttpCode.USER_LOGIN_ERROR);
             }
         }catch (AuthenticationException ex){
             System.out.println("currentUser:"+request.getSession().getAttribute("currentUser"));
-            result.put("result",false);
-            result.put("message","账号或密码错误");
+            return getJsonVo("failed to login", HttpCode.USER_LOGIN_ERROR);
         }
-        return result;
+
     }
     @RequestMapping(value = "check.do",method = RequestMethod.GET)
     @ResponseBody
-    public Map<String,Object> check(HttpServletRequest request){
+    public JsonVo check(HttpServletRequest request){
 
         HttpSession session = request.getSession();
-        Map<String,Object> result = new HashMap<>();
         String  principal = (String) session.getAttribute("currentUser");
         if (principal != null ){
-            result.put("result",true);
-            result.put("username",principal);
+            User user = new User();
+            user.setName(principal);
+            return getJsonVo("success",HttpCode.OK,user);
         }else{
-            result.put("result",false);
+            return getJsonVo("failed to check user",HttpCode.USER_LOGIN_ERROR);
         }
-        return result;
+
     }
 
     @RequestMapping(value = "logout.do" , method = RequestMethod.GET)
     @ResponseBody
-    public Boolean logout(HttpServletRequest request){
+    public JsonVo logout(HttpServletRequest request){
         try{
             Subject subject = SecurityUtils.getSubject();
             subject.logout();
-            return true;
+            return getJsonVo("success",HttpCode.OK);
         }catch (Exception e){
-            return false;
+            return getJsonVo("failed to logout",HttpCode.USER_LOGOUT_ERROR);
         }
     }
 

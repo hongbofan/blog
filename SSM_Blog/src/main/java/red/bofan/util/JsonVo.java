@@ -1,18 +1,34 @@
 package red.bofan.util;
 
 public class JsonVo {
-	private String content;
-	private Integer errorNum;
-	public String getContent() {
-		return content;
+	private String msg;
+	private Integer code;
+	private Object data;
+
+	public String getMsg() {
+		return msg;
 	}
-	public void setContent(String content) {
-		this.content = content;
+
+	public JsonVo setMsg(String msg) {
+		this.msg = msg;
+		return this;
 	}
-	public Integer getErrorNum() {
-		return errorNum;
+
+	public Integer getCode() {
+		return code;
 	}
-	public void setErrorNum(Integer errorNum) {
-		this.errorNum = errorNum;
+
+	public JsonVo setCode(Integer code) {
+		this.code = code;
+		return this;
+	}
+
+	public Object getData() {
+		return data;
+	}
+
+	public JsonVo setData(Object data) {
+		this.data = data;
+		return this;
 	}
 }
