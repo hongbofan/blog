@@ -62,7 +62,7 @@
                 }else{
                     //用户没有登录的时候
                     $("#nav-user-info").remove();
-                    alert(result.msg);
+//                    alert(result.msg);
                 }
             }
         });

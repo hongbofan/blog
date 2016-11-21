@@ -9,6 +9,8 @@ import red.bofan.dao.ArticleMapper;
 import red.bofan.model.Article;
 import red.bofan.util.PaginationVo;
 
+import java.util.Map;
+
 /**
  * Created by hongbofan on 2016/10/14.
  */
@@ -16,6 +18,10 @@ import red.bofan.util.PaginationVo;
 public class ArticleService {
     @Autowired
     private ArticleMapper articleMapper;
+
+    public Map insertSelectiveDDL(Integer count){
+        return articleMapper.insertSelectiveDDL(count);
+    }
     @Cacheable(value = "cache4jds",key="'selectByPrimaryKey('+#id+')'")
     public Article selectByPrimaryKey(String id){
         return articleMapper.selectByPrimaryKey(id);
@@ -33,6 +39,17 @@ public class ArticleService {
         pageVo.setRows(pagesize);
         pageVo.setPageNum(pagenum);
         pageVo.setList(articleMapper.selectByPageWithSearch(title,pageVo.getOffset(), pageVo.getRows()));
+        return pageVo;
+    }
+    @Cacheable(value = "cache4jds",key="'selectByPageWithSearch('+#pagenum+','+#pagesize+','+#title+')'")
+    public PaginationVo<Article> selectByPageWithSearchDDL(int pagenum,int pagesize,String title){
+        //int pagenum是当前的页码,int pagesize是每页显示的数据数量
+        PaginationVo<Article> pageVo=new PaginationVo<Article>();
+        //一定要在setPageCount()方法之后执行setPageNum
+        pageVo.setCount(articleMapper.selectCountBySearchDDL(title));
+        pageVo.setRows(pagesize);
+        pageVo.setPageNum(pagenum);
+        pageVo.setList(articleMapper.selectByPageWithSearchDDL(title,pageVo.getOffset(), pageVo.getRows()));
         return pageVo;
     }
 }
