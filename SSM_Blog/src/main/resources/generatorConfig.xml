@@ -87,7 +87,7 @@
 
 
 
-        <table tableName="article" schema="blog" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+        <table tableName="cipher" schema="blog" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false">
 
             <!-- optional   , only for mybatis3 runtime

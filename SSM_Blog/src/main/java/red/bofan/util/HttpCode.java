@@ -11,4 +11,6 @@ public class HttpCode {
     public static final Integer ARTICLE_INSERT_ERROR = 200201;
     public static final Integer ARTICLE_SELECT_ERROR = 200203;
     public static final Integer ARTICLE_LIST_ERROR = 200205;
+    public static final Integer CIPHER_ANSWER_ERROR = 200301;
+    public static final Integer CIPHER_ANSWER_SUCCESS = 200302;
 }
