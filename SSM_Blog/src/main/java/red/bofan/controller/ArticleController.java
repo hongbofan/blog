@@ -36,7 +36,7 @@ public class ArticleController extends BaseController{
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/upload.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/upload.json", method = RequestMethod.POST)
     public JsonVo upload(@RequestParam(value = "test-editormd-markdown-doc", required = false) String markdown,
                          @RequestParam(value = "test-editormd-html-code", required = false) String html,
                          @RequestParam(value = "title",required = false)String title) {
@@ -53,7 +53,7 @@ public class ArticleController extends BaseController{
             article.setUserId(currentUser.getId());
         }catch (Exception e){
             System.out.println(e.getMessage());
-            return getJsonVo("invalid user",HttpCode.USER_GET_ERROR);
+            return getJsonVo("invalid user",HttpCode.USER_SELECT_ERROR);
         }
         //插入文章验证
         try{

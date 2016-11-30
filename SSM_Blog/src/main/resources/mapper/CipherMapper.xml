@@ -48,6 +48,11 @@
     -->
     content
   </sql>
+
+  <select id="getAll" resultMap="ResultMapWithBLOBs">
+      SELECT <include refid="Base_Column_List"></include>,<include refid="Blob_Column_List"></include>
+      FROM cipher
+  </select>
   <insert id="insertSelective" parameterType="red.bofan.model.Cipher" >
     <!--
       WARNING - @mbggenerated

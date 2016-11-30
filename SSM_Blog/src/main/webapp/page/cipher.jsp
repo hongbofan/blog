@@ -22,8 +22,46 @@
             <h1 class="demo-headline">CIPHERS</h1>
             <h1> Imagine <small>Discover&Explore</small></h1>
         </div>
-        <h1>The cipher code is coming soon in</h1>
-        <h4 id="time"></h4>
+        <div id="cipher1">
+            <input title="cipher1_id" id="cipher1_id" value="" hidden="hidden"/>
+            <div class="progress">
+                <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                    20%
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h1 id="title1">The cipher code is coming soon in</h1>
+                    <h4 id="time1"></h4>
+                </div>
+            </div>
+        </div>
+        <div id="cipher2">
+            <div class="progress">
+                <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                    20%
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h1 id="title2">The cipher code is coming soon in</h1>
+                    <h4 id="time2"></h4>
+                </div>
+            </div>
+        </div>
+        <div id="cipher3">
+            <div class="progress">
+                <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                    20%
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h1 id="title3">The cipher code is coming soon in</h1>
+                    <h4 id="time3"></h4>
+                </div>
+            </div>
+        </div>
     </div>
 <jsp:include page="layout/foot.jsp"></jsp:include>
 <script src="//cdn.bootcss.com/sockjs-client/1.1.1/sockjs.min.js"></script>
@@ -47,9 +85,51 @@
             stompClient.subscribe('/subscribe/time', function(greeting){
                 console.log(greeting);
                 var message = JSON.parse(greeting.body);
-                $('#time').html(message.days +" days " + message.hours + " hours " + message.minutes + " minutes " + message.seconds + " seconds");
+                var ciphers = message.data;
+                for (var i = 1; i <= ciphers.length;i++){
+                    var cipher = ciphers[i - 1];
+                    var trigger = cipher.trigger;
+                    var hint1trigger = cipher.hint1trigger;
+                    var hint2trigger = cipher.hint2trigger;
+                    var hint3trigger = cipher.hint3trigger;
+                    //如果该cipher没有设置id并且后台允许，则发送ajax请求cipher
+                    if($('#cipher'+ i +'_id').val() == undefined && trigger){
+                        console.log('#cipher'+ i +'_id');
+                        $('#cipher'+ i +'_id').val(cipher.id);
+                        getCipher(cipher.id,i);
+                    }else{
+                        var time = msec2Date(cipher.remainingMsec);
+                        $('#time'+ i).html(time);
+                    }
+                }
             });
         });
+    }
+    getCipher = function (id,i) {
+        alert(id);
+        $.ajax({
+            url:"../cipher/"+id+".json",
+            type:"GET",
+            success:function (result) {
+                if (result.code == 200){
+                    $('#title'+ i).html(result.data.title);
+                }else {
+                    alert(result.msg);
+                }
+            }
+        });
+    };
+    function msec2Date(originMsec){
+        var tmpMsec,days,hours,minutes,seconds;
+        tmpMsec = originMsec;
+        days = Math.floor(tmpMsec / (1000 * 3600 * 24));
+        tmpMsec = tmpMsec - days * (1000 * 3600 * 24);
+        hours = Math.floor(tmpMsec / (1000 * 3600));
+        tmpMsec = tmpMsec - hours * (1000 * 3600);
+        minutes = Math.floor(tmpMsec / (1000 * 60));
+        tmpMsec = tmpMsec - minutes * (1000 * 60);
+        seconds = Math.floor(tmpMsec / (1000));
+        return days + " Days " + hours + " Hours " + minutes + " Minutes " + seconds + " Seconds.";
     }
 </script>
 </body>

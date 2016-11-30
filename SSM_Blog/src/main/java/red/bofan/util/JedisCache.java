@@ -78,14 +78,14 @@ public class JedisCache implements Cache {
         final String keyf = key.toString();
         final Object valuef = value;
         final long liveTime = 86400;
-        Set<String> set = redisTemplate.keys("selectByPageWithSearch*");
+        Set<String> set = redisTemplate.keys("article.selectByPageWithSearch*");
         Iterator<String> it = set.iterator();
         redisTemplate.execute(new RedisCallback<Long>() {
             public Long doInRedis(RedisConnection connection)
                     throws DataAccessException {
                 byte[] keyb = keyf.getBytes();
                 byte[] valueb = toByteArray(valuef);
-                if("selectByPageWithSearch".equals(keyf)){
+                if("article.selectByPageWithSearch".equals(keyf)){
                     while(it.hasNext()){
                         String keyStr = it.next();
                         System.out.println(keyStr);

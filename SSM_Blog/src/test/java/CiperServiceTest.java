@@ -14,6 +14,10 @@ public class CiperServiceTest extends BaseTest{
     @Autowired
     private CipherService cipherService;
     @Test
+    public void getAllTest(){
+        cipherService.getAll();
+    }
+    @Test
     public void insertCipherTest(){
         Cipher  cipher = new Cipher();
         cipher.setUserId("1");
