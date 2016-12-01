@@ -33,11 +33,39 @@ public class CipherController extends BaseController {
     private static List<CipherVo> cipherVos;//展示前端的bean封装
     private static List<Cipher> ciphers;//redis缓存
     private static Map<String,Boolean> publishMap;
-    private Long hintDelay = 1000*60*60L;
 
+
+    //获取提示接口
+    @RequestMapping(value = "/{id}/hint.json",method = RequestMethod.GET)
+    @ResponseBody
+    public JsonVo getHint(@PathVariable("id")String id,@RequestParam("hint") String hint){
+        if (!publishMap.get(id+"hint"+hint)){
+            return getJsonVo("This hint is unreachable",HttpCode.CIPHER_SELECT_ERROR);
+        }
+        try{
+            Cipher cipher = cipherService.selectByPrimaryKey(id);
+            if ("1".equals(hint)){
+                hint = cipher.getFhint();
+            }else if ("2".equals(hint)){
+                hint = cipher.getShint();
+            }else if ("3".equals(hint)){
+                hint = cipher.getThint();
+            }else {
+                hint = "=.=";
+            }
+            return getJsonVo("success",HttpCode.OK,hint);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return getJsonVo("Failed to select cipher",HttpCode.CIPHER_SELECT_ERROR);
+        }
+    }
+    //获取cipher题目、内容
     @RequestMapping(value = "/{id}.json",method = RequestMethod.GET)
     @ResponseBody
     public JsonVo getSingle (@PathVariable("id") String id) {
+        if(!publishMap.get(id)){
+            return getJsonVo("This cipher is unreachable",HttpCode.CIPHER_SELECT_ERROR);
+        }
         try{
             Cipher cipher = cipherService.selectByPrimaryKey(id);
             CipherVo cipherVo = new CipherVo();
@@ -46,19 +74,25 @@ public class CipherController extends BaseController {
             return getJsonVo("success",HttpCode.OK,cipherVo);
         }catch (Exception e){
             System.out.println(e.getMessage());
-            return getJsonVo("failed to select cipher",HttpCode.CIPHER_SELECT_ERROR);
+            return getJsonVo("Failed to select cipher",HttpCode.CIPHER_SELECT_ERROR);
         }
     }
-    @RequestMapping(value = "/{id}/answer.json", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}/answer.json", method = RequestMethod.POST)
     @ResponseBody
-    public JsonVo answer(@PathVariable(value = "id") String cipherId, @RequestParam(value = "answer") String answer) {
-        Cipher cipher = cipherService.selectByPrimaryKey(cipherId);
-        if (answer.equals(cipher.getAnswer())) {
-            return getJsonVo("Accept", HttpCode.CIPHER_ANSWER_SUCCESS);
-        } else {
-            return getJsonVo("Wrong", HttpCode.CIPHER_ANSWER_ERROR);
+    public JsonVo answer(@PathVariable(value = "id") String id, @RequestParam(value = "answer") String answer) {
+        if(!publishMap.get(id)){
+            return getJsonVo("This cipher is unreachable",HttpCode.CIPHER_SELECT_ERROR);
         }
-
+        try{
+            Cipher cipher = cipherService.selectByPrimaryKey(id);
+            if (answer.equals(cipher.getAnswer())) {
+                return getJsonVo("Accept", HttpCode.CIPHER_ANSWER_SUCCESS);
+            } else {
+                return getJsonVo("Wrong", HttpCode.CIPHER_ANSWER_ERROR);
+            }
+        }catch (Exception e){
+            return getJsonVo("Failed to select cipher",HttpCode.CIPHER_SELECT_ERROR);
+        }
     }
 
     @Scheduled(cron = "0/1 * *  * * ? ")//每秒执行一次
@@ -92,6 +126,7 @@ public class CipherController extends BaseController {
     }
 
     private void setMsec(CipherVo cipherVo){
+        Long hintDelay = 1000*60*60L;
         cipherVo.setRemainingMsec(date2Msec(cipherVo.getPublishTime()) - date2Msec(new Date()))
                 .setFhintRemainingMsec(date2Msec(cipherVo.getPublishTime()) + hintDelay*6 - date2Msec(new Date()))
                 .setShintRemainingMsec(date2Msec(cipherVo.getPublishTime()) + hintDelay*12 - date2Msec(new Date()))
@@ -122,9 +157,9 @@ public class CipherController extends BaseController {
         }
         if (cipherVo.getThintRemainingMsec() < 0){
             publishMap.put(cipherVo.getId()+"hint3",true);
+            cipherVo.setHint3trigger(true);
         }else {
             publishMap.put(cipherVo.getId()+"hint3",false);
-            cipherVo.setHint3trigger(true);
         }
     }
     private Long date2Msec(Date finalDate) {

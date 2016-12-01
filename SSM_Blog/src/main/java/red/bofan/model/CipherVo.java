@@ -22,9 +22,11 @@ public class CipherVo {
 
     private Boolean hint1trigger;
 
+
     private Long shintRemainingMsec;
 
     private Boolean hint2trigger;
+
 
     private Long thintRemainingMsec;
 
@@ -36,6 +38,7 @@ public class CipherVo {
         this.hint2trigger = false;
         this.hint3trigger = false;
     }
+
 
     public Date getPublishTime() {
         return publishTime;

@@ -40,13 +40,13 @@ public class MainController extends BaseController{
             subject.login(new UsernamePasswordToken(username, password));
             if (subject.isAuthenticated()) {
                 this.setSession("currentUser",subject.getPrincipal());
-                return getJsonVo("success", HttpCode.OK);
+                return getJsonVo("Success", HttpCode.OK);
             } else {
-                return getJsonVo("failed to login", HttpCode.USER_LOGIN_ERROR);
+                return getJsonVo("Failed to login", HttpCode.USER_LOGIN_ERROR);
             }
         }catch (AuthenticationException ex){
             System.out.println("currentUser:"+request.getSession().getAttribute("currentUser"));
-            return getJsonVo("failed to login", HttpCode.USER_LOGIN_ERROR);
+            return getJsonVo("Failed to login", HttpCode.USER_LOGIN_ERROR);
         }
 
     }
@@ -59,9 +59,9 @@ public class MainController extends BaseController{
         if (principal != null ){
             User user = new User();
             user.setName(principal);
-            return getJsonVo("success",HttpCode.OK,user);
+            return getJsonVo("Success",HttpCode.OK,user);
         }else{
-            return getJsonVo("failed to check user",HttpCode.USER_LOGIN_ERROR);
+            return getJsonVo("Failed to check user",HttpCode.USER_LOGIN_ERROR);
         }
 
     }
@@ -72,9 +72,9 @@ public class MainController extends BaseController{
         try{
             Subject subject = SecurityUtils.getSubject();
             subject.logout();
-            return getJsonVo("success",HttpCode.OK);
+            return getJsonVo("Success",HttpCode.OK);
         }catch (Exception e){
-            return getJsonVo("failed to logout",HttpCode.USER_LOGOUT_ERROR);
+            return getJsonVo("Failed to logout",HttpCode.USER_LOGOUT_ERROR);
         }
     }
 

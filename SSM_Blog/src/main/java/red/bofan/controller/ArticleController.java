@@ -53,15 +53,15 @@ public class ArticleController extends BaseController{
             article.setUserId(currentUser.getId());
         }catch (Exception e){
             System.out.println(e.getMessage());
-            return getJsonVo("invalid user",HttpCode.USER_SELECT_ERROR);
+            return getJsonVo("Invalid user",HttpCode.USER_SELECT_ERROR);
         }
         //插入文章验证
         try{
             System.out.println(articleService.insertSelective(article));
-            return getJsonVo("success",HttpCode.OK);
+            return getJsonVo("Success",HttpCode.OK);
         }catch (Exception e){
             System.out.println(e.getMessage());
-            return getJsonVo("failed to insert article",HttpCode.ARTICLE_INSERT_ERROR);
+            return getJsonVo("Failed to insert article",HttpCode.ARTICLE_INSERT_ERROR);
         }
     }
 
@@ -70,10 +70,10 @@ public class ArticleController extends BaseController{
     public JsonVo getSingle(@PathVariable("id") String id) {
         try{
             Article article = articleService.selectByPrimaryKey(id);
-            return getJsonVo("success",HttpCode.OK,article);
+            return getJsonVo("Success",HttpCode.OK,article);
         }catch (Exception e){
             System.out.println(e.getMessage());
-            return getJsonVo("failed to select article",HttpCode.ARTICLE_SELECT_ERROR);
+            return getJsonVo("Failed to select article",HttpCode.ARTICLE_SELECT_ERROR);
         }
     }
     @ResponseBody
@@ -85,10 +85,10 @@ public class ArticleController extends BaseController{
             Map<String, Object> result = new HashMap<>();
             result.put("articles", paginationVo.getList());
             result.put("pageInfo", paginationVo);
-            return getJsonVo("success",HttpCode.OK,result);
+            return getJsonVo("Success",HttpCode.OK,result);
         }catch (Exception e){
             System.out.println(e.getMessage());
-            return getJsonVo("failed to list article",HttpCode.ARTICLE_LIST_ERROR);
+            return getJsonVo("Failed to list article",HttpCode.ARTICLE_LIST_ERROR);
         }
     }
 
