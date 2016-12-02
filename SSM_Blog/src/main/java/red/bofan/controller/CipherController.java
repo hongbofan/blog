@@ -97,7 +97,7 @@ public class CipherController extends BaseController {
 
     @Scheduled(cron = "0/1 * *  * * ? ")//每秒执行一次
     @MessageMapping("/hello")
-    @SendTo("/subscribe/time") // 订阅
+    @SendTo("/subscribe/cipher") // 订阅
     public void greeting() throws Exception {
         //第一次从redis或数据库拿
         if (ciphers == null){
@@ -122,7 +122,7 @@ public class CipherController extends BaseController {
             //设置发布白名单
             setPublishMap(cipherVo);
         });
-        template.convertAndSend("/subscribe/time", getJsonVo("subscribe success", HttpCode.OK, cipherVos));
+        template.convertAndSend("/subscribe/cipher", getJsonVo("subscribe success", HttpCode.OK, cipherVos));
     }
 
     private void setMsec(CipherVo cipherVo){
