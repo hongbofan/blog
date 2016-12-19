@@ -94,9 +94,12 @@ public class JedisCache implements Cache {
                 }else {
                     connection.set(keyb, valueb);
                 }
-
-                if (liveTime > 0) {
-                    connection.expire(keyb, liveTime);
+                if(keyf.startsWith("IP")){
+                    connection.expire(keyb, 180);
+                }else{
+                    if (liveTime > 0) {
+                        connection.expire(keyb, liveTime);
+                    }
                 }
                 return 1L;
             }

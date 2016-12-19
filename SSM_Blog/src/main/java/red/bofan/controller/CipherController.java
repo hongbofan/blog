@@ -3,6 +3,8 @@ package red.bofan.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.sun.istack.internal.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -13,9 +15,12 @@ import red.bofan.model.Cipher;
 import red.bofan.model.CipherVo;
 import red.bofan.service.CipherService;
 import red.bofan.util.HttpCode;
+import red.bofan.util.IP;
+import red.bofan.util.JedisCache;
 import red.bofan.util.JsonVo;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -29,7 +34,8 @@ public class CipherController extends BaseController {
 
     @Resource
     private SimpMessagingTemplate template;//简单信息广播
-
+    @Autowired
+    private CacheManager cacheManager;
     private static List<CipherVo> cipherVos;//展示前端的bean封装
     private static List<Cipher> ciphers;//redis缓存
     private static Map<String,Boolean> publishMap;
@@ -79,10 +85,28 @@ public class CipherController extends BaseController {
     }
     @RequestMapping(value = "/{id}/answer.json", method = RequestMethod.POST)
     @ResponseBody
-    public JsonVo answer(@PathVariable(value = "id") String id, @RequestParam(value = "answer") String answer) {
+    public JsonVo answer(@PathVariable(value = "id") String id, @RequestParam(value = "answer") String answer, HttpServletRequest request) {
         if(!publishMap.get(id)){
             return getJsonVo("This cipher is unreachable",HttpCode.CIPHER_SELECT_ERROR);
         }
+
+        try {
+            String ip = IP.getIpAddr(request);
+            JedisCache jedisCache = (JedisCache) cacheManager.getCache("cache4jds");
+            Cache.ValueWrapper value = jedisCache.get("IP:"+ ip);
+            if(value == null){
+                jedisCache.put("IP:"+ ip,10);
+            }else{
+                int count = (Integer)value.get();
+                if(--count < 0){
+                    return getJsonVo("Wait 3 minutes!", HttpCode.CIPHER_ANSWER_LIMITED);
+                }
+                jedisCache.put("IP:"+ ip,count);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         try{
             Cipher cipher = cipherService.selectByPrimaryKey(id);
             if (answer.equals(cipher.getAnswer())) {

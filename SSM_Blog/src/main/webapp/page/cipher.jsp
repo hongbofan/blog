@@ -233,9 +233,9 @@
         var socket = new SockJS('/webSocket/hello.htm');
         stompClient = Stomp.over(socket);
         stompClient.connect({}, function(frame) {
-            console.log('Connected: ' + frame);
+            //console.log('Connected: ' + frame);
             stompClient.subscribe('/subscribe/cipher', function(greeting){
-                console.log(greeting);
+                //console.log(greeting);
                 var message = JSON.parse(greeting.body);
                 var ciphers = message.data;
                 for (var i = 1; i <= ciphers.length;i++){
@@ -244,7 +244,7 @@
                     var times = [cipher.remainingMsec,cipher.fhintRemainingMsec,cipher.shintRemainingMsec,cipher.thintRemainingMsec];
                     //如果该cipher没有设置id并且后台允许，则发送ajax请求cipher
                     if($('#cipher'+ i +'_id').val() == "" && triggers[0]){
-                        console.log('#cipher'+ i +'_id');
+                        //console.log('#cipher'+ i +'_id');
                         $('#cipher'+ i +'_id').val(cipher.id);
                         getCipher(cipher.id,i);
                     }else if($('#cipher'+ i +'_id').val() == "" && !triggers[0]){
@@ -253,7 +253,7 @@
                     }
                     for(var j = 1;j <= 3;j++){
                         if($('#cipher'+ i +'_hint' + j + '_id').val() == "" && triggers[j]){
-                            console.log('#cipher'+ i +'_hint' + j + '_id');
+                            //console.log('#cipher'+ i +'_hint' + j + '_id');
                             $('#cipher'+ i +'_hint' + j + '_id').val(cipher.id);
                             getHint(cipher.id,i,j);
                         }else if ($('#cipher'+ i +'_hint' + j + '_id').val() == "" && !triggers[j]){
@@ -273,7 +273,7 @@
         var currentHours = (new Date().getTime() - startTimeStamp)/hoursTimeStamp;
         var publishHours = (cipher.publishTime - startTimeStamp)/hoursTimeStamp;
         var progress = Math.floor(currentHours / publishHours * 100) + "%";
-        console.log(currentHours+","+ publishHours+","+ progress);
+        //console.log(currentHours+","+ publishHours+","+ progress);
         if(cipher.trigger){
             $('#cipher'+i+'_progress').html('100%');
             $('#cipher'+i+'_progress').css('width','100%');
@@ -341,7 +341,7 @@
     };
 
     getHint = function (id,i,j) {
-        alert(id+","+ i +","+ j);
+        //alert(id+","+ i +","+ j);
         $.ajax({
             url:"../cipher/"+id+"/hint.json?hint="+j,
             type:"GET",
@@ -355,7 +355,7 @@
         });
     };
     getCipher = function (id,i) {
-        alert(id+','+i);
+        //alert(id+','+i);
         $.ajax({
             url:"../cipher/"+id+".json",
             type:"GET",

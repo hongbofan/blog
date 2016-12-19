@@ -14,4 +14,5 @@ public class HttpCode {
     public static final Integer CIPHER_ANSWER_ERROR = 200301;
     public static final Integer CIPHER_ANSWER_SUCCESS = 200302;
     public static final Integer CIPHER_SELECT_ERROR = 200303;
+    public static final Integer CIPHER_ANSWER_LIMITED = 200305;
 }
