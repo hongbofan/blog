@@ -13,21 +13,19 @@
 </head>
 <body>
 <jsp:include page="layout/nav.jsp"></jsp:include>
-<div class="jumbotron">
-    <h1>Navbar example</h1>
-    <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It
-        includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-    <p>To see the difference between static and fixed top navbars, just scroll.</p>
-    <p>1</p>
-    <p>1</p>
-    <p>
-        <a class="btn btn-lg btn-primary" data-toggle="modal" data-target=".modal_QRCode" role="button">Contact Me &raquo;</a>
+<div class="jumbotron" onclick="change()">
+    <h1 id="jb_line1">IF......</h1>
+    <h1 id="jb_line2">YOU</h1>
+    <h1 id="jb_line3">LIKE</h1>
+    <p></p>
+    <p id="jb_button">
+        <a  id="jb_modal" class="btn btn-lg btn-primary"  data-toggle="modal" data-target=".modal_QRCode" role="button">Contact Me &raquo;</a>
     </p>
-    <span class="fa fa-firefox "></span>
-    <span class="fa fa-chrome "></span>
-    <span class="fa fa-edge "></span>
-    <span class="fa fa-internet-explorer "></span>
-    <span class="fa fa-opera "></span>
+    <%--<span class="fa fa-firefox "></span>--%>
+    <%--<span class="fa fa-chrome "></span>--%>
+    <%--<span class="fa fa-edge "></span>--%>
+    <%--<span class="fa fa-internet-explorer "></span>--%>
+    <%--<span class="fa fa-opera "></span>--%>
 </div>
 <div class="page-header">
 
@@ -226,11 +224,18 @@
 </div>
 <jsp:include page="layout/foot.jsp"></jsp:include>
 <script>
+    var lines = new Array("IF......,YOU,LIKE","&nbsp,&nbsp,&nbsp");
+    var index = 0;
     $(document).ready(function (){
         $("#nav_article").removeClass("active");
         $("#nav_cipher").removeClass("active");
         $("#nav_home").addClass("active");
         $("#nav_login").removeClass("active");
+        change();
+        $('#jb_modal').click(function () {
+            $('.modal_QRCode').modal('show');
+            return false;
+        })
     });
 </script>
 <script type="text/javascript">
@@ -242,7 +247,19 @@
             $(this).animate({height:"100px"},100).removeClass("on");
             $(this).find("img").stop(true,true).animate({"width":"100px","height":"100px"});
         });
-    })
+    });
+    change = function () {
+        var jb_lines = lines[index++].split(',');
+        if(index == lines.length){
+            $('#jb_button').hide();
+        }else{
+            $('#jb_button').show();
+        }
+        for(var i=1;i<=jb_lines.length;i++){
+            $('#jb_line'+i).html(jb_lines[i-1]);
+        }
+        index %= lines.length;
+    }
 </script>
 </body>
 </html>
