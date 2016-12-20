@@ -75,7 +75,7 @@
                     });
                     $("#pagination-box").html(paginationTemplate);
                 }else {
-                    alert(result.msg);
+                    dialogDan.setMessage(result.msg).open();
                 }
 
             }

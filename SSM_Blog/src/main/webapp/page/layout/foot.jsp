@@ -15,6 +15,7 @@
 <script src="../../assert/js/flat-ui.min.js"></script>
 <script src="../../assert/js/application.js"></script>
 <script src="../../assert/js/underscore-min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap3-dialog/1.35.3/js/bootstrap-dialog.min.js"></script>
 <script type="text/javascript">
     _.templateSettings = {
         evaluate : /\{%([\s\S]+?)\%\}/g,
@@ -25,5 +26,15 @@
 <script>
     $(document).ready(function (){
         checkLogin();
+        dialogSuc =  new BootstrapDialog({
+            type: BootstrapDialog.TYPE_SUCCESS,
+            title: 'Result',
+            cssClass: 'col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1'
+        });
+        dialogDan = new BootstrapDialog({
+            type: BootstrapDialog.TYPE_DANGER,
+            title: 'Result',
+            cssClass: 'col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1'
+        });
     });
 </script>

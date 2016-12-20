@@ -13,6 +13,7 @@
 <link href="../../assert/css/flat-ui.min.css" rel="stylesheet">
 <%--<link href="../../assert/css/docs.css" rel="stylesheet">--%>
 <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/bootstrap3-dialog/1.35.3/css/bootstrap-dialog.min.css" rel="stylesheet">
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -20,4 +21,7 @@
 <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 <link rel="shortcut icon" href="../../assert/img/favicon.ico">
+<script>
+    var dialogSuc,dialogDan;
+</script>
 <title>HelloHbf</title>

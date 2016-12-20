@@ -89,7 +89,7 @@
                 if(result.code == 200){
                     window.location.href = "/home.htm";
                 }else{
-                    alert(result.msg);
+                    dialogDan.setMessage(result.msg).open();
                 }
             }
         });

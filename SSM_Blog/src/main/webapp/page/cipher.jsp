@@ -31,6 +31,9 @@
         #cipher3_title{
             font-size: 3.0vw;
         }
+        .login-dialog .modal-dialog {
+            width: 300px;
+        }
     </style>
 </head>
 <body>
@@ -306,13 +309,14 @@
             $('#cipher'+i+'_hint3_progress').css('width', hint3progress);
         }
     };
+
     answer = function (answer,id) {
         if(id == ""){
-            alert("This cipher is unreachable.");
+            dialogDan.setMessage("This cipher is unreachable.").open();
             return;
         }
         if(answer == ""){
-            alert("Input answer please.");
+            dialogDan.setMessage("Input answer please.").open();
             return;
         }
         $.ajax({
@@ -320,7 +324,11 @@
             data:{answer:answer},
             type:"POST",
             success:function (result) {
-                alert(result.msg);
+                if(result.msg == "Wrong"){
+                    dialogSuc.setMessage(result.msg).open();
+                }else{
+                    dialogDan.setMessage(result.msg).open();
+                }
             }
         });
     };
@@ -349,7 +357,7 @@
                 if(result.code == 200){
                     $('#cipher'+ i +'_hint' + j + '_content').html("hint"+ j +":"+ result.data);
                 }else {
-                    alert(result.msg);
+                    dialogDan.setMessage(result.msg).open();
                 }
             }
         });
@@ -364,7 +372,7 @@
                     $('#cipher'+ i + '_title').html(result.data.title);
                     $('#cipher'+ i + '_content').html(result.data.content);
                 }else {
-                    alert(result.msg);
+                    dialogDan.setMessage(result.msg).open();
                 }
             }
         });

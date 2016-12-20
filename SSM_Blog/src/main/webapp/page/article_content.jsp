@@ -66,7 +66,7 @@
                     });
                     $("#title").text(result.data.title);
                 }else {
-                    alert(result.msg);
+                    dialogDan.setMessage(result.msg).open();
                 }
 
             }});
