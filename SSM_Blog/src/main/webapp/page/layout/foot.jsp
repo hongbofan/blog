@@ -29,12 +29,12 @@
         dialogSuc =  new BootstrapDialog({
             type: BootstrapDialog.TYPE_SUCCESS,
             title: 'Result',
-            cssClass: 'col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1'
+            cssClass: 'col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 text-center'
         });
         dialogDan = new BootstrapDialog({
             type: BootstrapDialog.TYPE_DANGER,
             title: 'Result',
-            cssClass: 'col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1'
+            cssClass: 'col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 text-center'
         });
     });
 </script>

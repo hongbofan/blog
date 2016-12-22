@@ -11,9 +11,9 @@
 <html>
 <head>
     <jsp:include page="layout/head.jsp"></jsp:include>
-    <link rel="stylesheet" type="text/css" href="../assert/css/component.css" />
+    <link rel="stylesheet" type="text/css" href="../assert/css/articleList.css" />
 </head>
-<body>
+<body >
 <jsp:include page="layout/nav.jsp"></jsp:include>
 
     <div class="container">
@@ -36,7 +36,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row articleList">
             <div id="article-list-box" class="grid"></div>
         </div>
         <p></p>
@@ -103,15 +103,18 @@
     }
 </script>
 <script id="article-list-template" type="text/template">
-
+    {%var index = 0,imgPath; %}
     {% for( var article in list){ %}
+    {%index++;imgPath="../assert/img/"+index+".png"%}
     <a href="/article/{%= list[article]['id'] %}.htm" data-path-hover="M 0,0 0,38 90,58 180.5,38 180,0 z" class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
         <figure>
-            <img src="../assert/img/1.png" />
+            <img src={%= imgPath %} />
             <svg viewBox="0 0 180 320" preserveAspectRatio="none"><path d="M 0 0 L 0 182 L 90 126.5 L 180 182 L 180 0 L 0 0 z "/></svg>
             <figcaption>
                 <h2>{%= list[article]['title'] %}</h2>
-                <p></p>
+                <%--<h2>2016-12-22 基于四叉树的2D圆形碰撞检测筛选</h2>--%>
+                <%--<p>啊啊啊啊啊啊 啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊  啊啊啊啊啊啊啊啊  </p>--%>
+                <button>View</button>
             </figcaption>
         </figure>
     </a>

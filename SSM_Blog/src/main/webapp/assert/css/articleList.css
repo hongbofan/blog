@@ -96,7 +96,7 @@
 }
 
 .grid svg path {
-	fill: #ddd;
+	fill: rgba(251,255,242,0.8);
 }
 
 /* Hover effects */
@@ -112,6 +112,48 @@
 
 .grid a:hover figcaption p {
 	opacity: 0;
+}
+
+.articleList .grid figure button {
+	top: 50%;
+	left: 50%;
+	border: 3px solid #fff;
+	background: transparent;
+	color: #fff;
+	opacity: 0;
+	-webkit-transform: translateY(-50%) translateX(-50%) scale(0.25);
+	transform: translateY(-50%) translateX(-50%) scale(0.25);
+}
+
+.articleList .grid a:hover figure button {
+	opacity: 1;
+	-webkit-transform: translateY(-50%) translateX(-50%) scale(1);
+	transform: translateY(-50%) translateX(-50%) scale(1);
+}
+
+
+.articleList .grid figcaption h2,
+.articleList .grid figcaption p {
+	-webkit-transition-timing-function: cubic-bezier(0.250, 0.250, 0.115, 1); /* older webkit */
+	-webkit-transition-timing-function: cubic-bezier(0.250, 0.250, 0.115, 1.445);
+	timing-function: cubic-bezier(0.250, 0.250, 0.115, 1.445);
+}
+
+.articleList .grid a:hover figcaption p {
+	-webkit-transition-delay: 0s;
+	transition-delay: 0s;
+	-webkit-transition-duration: 0.1s;
+	transition-duration: 0.1s;
+}
+
+.articleList .grid figcaption h2 {
+	font-weight: bold;
+	color: #34495e;
+}
+
+.articleList .grid a:hover figcaption h2 {
+	-webkit-transform: translateY(5px);
+	transform: translateY(5px);
 }
 
 /* Media Queries */

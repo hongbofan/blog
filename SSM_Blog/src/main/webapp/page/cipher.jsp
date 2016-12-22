@@ -325,9 +325,9 @@
             type:"POST",
             success:function (result) {
                 if(result.msg == "Wrong"){
-                    dialogSuc.setMessage(result.msg).open();
-                }else{
                     dialogDan.setMessage(result.msg).open();
+                }else{
+                    dialogSuc.setMessage(result.msg).open();
                 }
             }
         });
