@@ -25,7 +25,7 @@
     id, title, content, user_id,lastDate
   </sql>
     <select id="selectCountBySearchDDL" resultType="java.lang.Integer" parameterType="java.lang.Object">
-        {CALL article_selectCountBySearchDDL(#{title,jdbcType=VARCHAR})}
+        {CALL article_selectCountBySearch(#{title,jdbcType=VARCHAR})}
     </select>
     <select id="selectByPageWithSearchDDL" resultMap="BaseResultMap" parameterType="java.lang.Object">
         {CALL article_selectByPageWithSearch(#{title,jdbcType=VARCHAR},#{startrow,jdbcType=INTEGER},#{rows,jdbcType=INTEGER}})

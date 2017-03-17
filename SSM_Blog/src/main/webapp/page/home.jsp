@@ -21,18 +21,12 @@
     <p id="jb_button">
         <a  id="jb_modal" class="btn btn-lg btn-primary"  data-toggle="modal" data-target=".modal_QRCode" role="button">Contact Me &raquo;</a>
     </p>
-    <%--<span class="fa fa-firefox "></span>--%>
-    <%--<span class="fa fa-chrome "></span>--%>
-    <%--<span class="fa fa-edge "></span>--%>
-    <%--<span class="fa fa-internet-explorer "></span>--%>
-    <%--<span class="fa fa-opera "></span>--%>
 </div>
-<div class="page-header">
 
-
-</div>
 <div class="container">
-
+    <div class="page-header">
+        <h1 class="demo-headline">To be continued...</h1>
+    </div>
     <%--<style type="text/css">--%>
     <%--ul,li{list-style:none;}--%>
     <%--.heartPic{width:749px;height:630px;margin:60px auto 0 auto;}--%>

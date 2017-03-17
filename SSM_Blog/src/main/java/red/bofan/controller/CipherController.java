@@ -1,7 +1,6 @@
 package red.bofan.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import com.sun.istack.internal.NotNull;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import red.bofan.model.Cipher;
 import red.bofan.model.CipherVo;
-import red.bofan.service.CipherService;
 import red.bofan.util.HttpCode;
 import red.bofan.util.IP;
 import red.bofan.util.JedisCache;
@@ -109,8 +107,15 @@ public class CipherController extends BaseController {
 
         try{
             Cipher cipher = cipherService.selectByPrimaryKey(id);
-            if (answer.equals(cipher.getAnswer())) {
-                return getJsonVo("Accept", HttpCode.CIPHER_ANSWER_SUCCESS);
+            if (answer.trim().toLowerCase().equals(cipher.getAnswer())) {
+                if("triones".equals(cipher.getAnswer())){
+                    return getJsonVo("Accept,63946804", HttpCode.CIPHER_ANSWER_SUCCESS);
+                }else if("firecracker".equals(cipher.getAnswer())){
+                    return getJsonVo("Accept,31695804", HttpCode.CIPHER_ANSWER_SUCCESS);
+                }else{
+                    return getJsonVo("Accept,08085904", HttpCode.CIPHER_ANSWER_SUCCESS);
+                }
+
             } else {
                 return getJsonVo("Wrong", HttpCode.CIPHER_ANSWER_ERROR);
             }
@@ -152,9 +157,9 @@ public class CipherController extends BaseController {
     private void setMsec(CipherVo cipherVo){
         Long hintDelay = 1000*60*60L;
         cipherVo.setRemainingMsec(date2Msec(cipherVo.getPublishTime()) - date2Msec(new Date()))
-                .setFhintRemainingMsec(date2Msec(cipherVo.getPublishTime()) + hintDelay*6 - date2Msec(new Date()))
-                .setShintRemainingMsec(date2Msec(cipherVo.getPublishTime()) + hintDelay*12 - date2Msec(new Date()))
-                .setThintRemainingMsec(date2Msec(cipherVo.getPublishTime()) + hintDelay*18 - date2Msec(new Date()));
+                .setFhintRemainingMsec(date2Msec(cipherVo.getPublishTime()) + hintDelay*1 - date2Msec(new Date()))
+                .setShintRemainingMsec(date2Msec(cipherVo.getPublishTime()) + hintDelay*2 - date2Msec(new Date()))
+                .setThintRemainingMsec(date2Msec(cipherVo.getPublishTime()) + hintDelay*3 - date2Msec(new Date()));
     }
     //通过map来判断是否发布
     private void  setPublishMap(CipherVo cipherVo){

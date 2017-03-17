@@ -6,10 +6,16 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div class="container-fluid">
-    <hr>
-    <p class="text-center">Copyright © 2016 hongbofan's Blog All Rights Reserved.</p>
-</div>
+<footer class="footer">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="navbar-inverse"></div>
+            <hr>
+            <p class="text-center">Copyright © 2016 hongbofan's Blog All Rights Reserved.</p>
+        </div>
+    </div>
+</footer>
+
 
 <script src="../../assert/js/jquery.min.js"></script>
 <script src="../../assert/js/flat-ui.min.js"></script>

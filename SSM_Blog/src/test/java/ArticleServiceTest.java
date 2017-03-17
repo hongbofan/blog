@@ -50,6 +50,10 @@ public class ArticleServiceTest extends BaseTest {
     private TaskExecutor taskExecutor;
     Integer count = 0;
     @Test
+    public  void selectArticlePageTest(){
+        articleService.selectByPageWithSearch(1,10,"9");
+    }
+    @Test
     public void selectArticlePageDDLTest(){
         PaginationVo paginationVo = articleService.selectByPageWithSearchDDL(16000,10,"");
         System.out.println(paginationVo.getList().size()+","+ ((Article)paginationVo.getList().get(0)).getTitle());
@@ -60,7 +64,7 @@ public class ArticleServiceTest extends BaseTest {
     }
     @Test
     public void insertArticleTest(){
-        for(int i = 0; i<50000;i++){
+        for(int i = 0; i<100;i++){
             Article article = new Article();
             String id = UUID.randomUUID().toString();
             article.setId(id);
@@ -90,7 +94,7 @@ public class ArticleServiceTest extends BaseTest {
                 }
             }
         }
-        while (count != 100000){
+        while (count != 100){
 //           System.out.println("count:"+count);
 //            int a = 1;
 //            int b = a+1;

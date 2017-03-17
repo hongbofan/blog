@@ -13,7 +13,7 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
             </button>
-            <a class="navbar-brand" href="javascript:void(0)">HONGBOFAN<i class="fa fa-mars-stroke-v"></i></a>
+            <a class="navbar-brand" href="#">: )</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">

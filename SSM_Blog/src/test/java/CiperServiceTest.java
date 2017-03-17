@@ -23,7 +23,7 @@ public class CiperServiceTest extends BaseTest{
         cipher.setUserId("1");
         cipher.setId(UUID.randomUUID().toString());
         cipher.setAnswer("answer");
-        //cipher.setTitle("title");
+        cipher.setTitle("title");
         cipher.setFhint("fhint");
         cipher.setShint("shint");
         cipher.setThint("thint");
