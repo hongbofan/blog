@@ -32,6 +32,7 @@
         <property name="poolConfig" ref="jedisPoolConfig" />
         <property name="port" value="${redis.port}" />
         <property name="hostName" value="${redis.host}" />
+        <property name="password" value="${redis.password}"/>
     </bean>
     <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate" >
         <property name="connectionFactory" ref="connectionFactory" />

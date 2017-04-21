@@ -12,6 +12,7 @@
             <div class="navbar-inverse"></div>
             <hr>
             <p class="text-center">Copyright © 2016 hongbofan's Blog All Rights Reserved.</p>
+            <p class="text-center" href="http://www.miitbeian.gov.cn/">浙ICP备17015438号</p>
         </div>
     </div>
 </footer>
