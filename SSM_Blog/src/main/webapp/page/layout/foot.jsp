@@ -11,8 +11,9 @@
         <div class="row-fluid">
             <div class="navbar-inverse"></div>
             <hr>
+            <p class="text-center"><a href="http://www.miitbeian.gov.cn/" target="_blank">浙ICP备17015438号</a></p>
+            <p class="text-center">浙江省杭州市余杭区五常街道</p>
             <p class="text-center">Copyright © 2016 hongbofan's Blog All Rights Reserved.</p>
-            <p class="text-center" href="http://www.miitbeian.gov.cn/">浙ICP备17015438号</p>
         </div>
     </div>
 </footer>
