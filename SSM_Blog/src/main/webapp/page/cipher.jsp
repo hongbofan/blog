@@ -215,6 +215,62 @@
                 </div>
             </div>
         </div>
+        <div id="cipher4">
+            <input title="cipher4_id" id="cipher4_id" value="" hidden="hidden"/>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div id="cipher4_hints" class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
+                            <div id="cipher4_hint1">
+                                <div class="progress" style="margin-bottom: 0px">
+                                    <div id="cipher4_hint1_progress" class="progress-bar progress-bar-warning" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                        0%
+                                    </div>
+                                </div>
+                                <input title="cipher3_hint1_id" id="cipher4_hint1_id" value="" hidden="hidden"/>
+                                <div id="cipher4_hint1_content">hint1:0 : 0 : 0 : 0</div>
+                            </div>
+                            <div id="cipher4_hint2">
+                                <div class="progress" style="margin-bottom: 0px">
+                                    <div id="cipher4_hint2_progress" class="progress-bar progress-bar-success " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                        0%
+                                    </div>
+                                </div>
+                                <input title="cipher4_hint2_id" id="cipher4_hint2_id" value="" hidden="hidden"/>
+                                <div id="cipher4_hint2_content">hint2:0 : 0 : 0 : 0</div>
+                            </div>
+                            <div id="cipher4_hint3">
+                                <div class="progress" style="border-radius: 4px;margin-bottom: 0px">
+                                    <div id="cipher4_hint3_progress" class="progress-bar progress-bar-striped " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                        0%
+                                    </div>
+                                </div>
+                                <input title="cipher3_hint3_id" id="cipher4_hint3_id" value="" hidden="hidden"/>
+                                <div id="cipher4_hint3_content">hint3:0 : 0 : 0 : 0</div>
+                            </div>
+
+                        </div>
+                        <div id="cipher4_title_content" class="col-lg-8 col-sm-8 col-md-8 col-xs-8">
+                            <div class="progress" style="margin-bottom: 0px">
+                                <div id="cipher4_progress" class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                    0%
+                                </div>
+                            </div>
+                            <h4 id="cipher4_title" class="text-center">The cipher code is coming soon in</h4>
+                            <div id="cipher4_content"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="input-group col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4 col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-3">
+                        <input type="text" class="form-control" placeholder="input answer" id="cipher4_answer">
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn" onclick="answer4()" id="cipher4_search_button"><span class="fa fa-paper-plane"></span></button>
+                    </span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 <jsp:include page="layout/foot.jsp"></jsp:include>
 <script src="//cdn.bootcss.com/sockjs-client/1.1.1/sockjs.min.js"></script>
@@ -347,6 +403,11 @@
         var id = $('#cipher3_id').val();
         answer(cipher3_answer,id);
     };
+    answer4 = function() {
+        var cipher4_answer = $('#cipher4_answer').val();
+        var id = $('#cipher4_id').val();
+        answer(cipher4_answer,id);
+    }
 
     getHint = function (id,i,j) {
         //alert(id+","+ i +","+ j);
