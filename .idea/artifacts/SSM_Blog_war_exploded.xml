@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="SSM_Blog:war exploded">
-    <output-path>$PROJECT_DIR$/target/SSM_Blog</output-path>
+    <output-path>$PROJECT_DIR$/SSM_Blog/target/SSM_Blog</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -9,10 +9,10 @@
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: org.mindrot:jbcrypt:0.3m" />
           <element id="library" level="project" name="Maven: org.apache.shiro:shiro-core:1.2.4" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.21" />
           <element id="library" level="project" name="Maven: commons-beanutils:commons-beanutils:1.8.3" />
           <element id="library" level="project" name="Maven: org.apache.shiro:shiro-web:1.2.4" />
           <element id="library" level="project" name="Maven: org.apache.shiro:shiro-spring:1.2.4" />
-          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.21" />
           <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-core:2.6.2" />
           <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-api:2.6.2" />
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.37" />
@@ -59,7 +59,7 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/SSM_Blog/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/SSM_Blog/target/SSM_Blog/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="SSM_Blog/web/Web" />
     </root>
