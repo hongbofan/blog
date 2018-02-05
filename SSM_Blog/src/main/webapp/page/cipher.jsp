@@ -40,16 +40,21 @@
         .login-dialog .modal-dialog {
             width: 300px;
         }
+        .container {
+            opacity: 0.9;
+        }
     </style>
+    <link rel="stylesheet" href="../assert/css/canvas.css">
 </head>
 <body>
 <jsp:include page="layout/nav.jsp"></jsp:include>
 <noscript>
     <h2 style="color: #ff0000">不支持的浏览器版本,丫的是不是用IE了,你这简直是摧残程序员的生命</h2>
 </noscript>
-
+<canvas id="canvas">您的浏览器不支持 HTML5 canvas 标签。</canvas>
     <div class="container">
         <div class="page-header">
+
             <h1 class="demo-headline">CIPHERS</h1>
             <h1> Imagine <small>Discover&Explore</small></h1>
         </div>
@@ -277,10 +282,13 @@
                 </div>
             </div>
         </div>
+
     </div>
+
 <jsp:include page="layout/foot.jsp"></jsp:include>
 <script src="//cdn.bootcss.com/sockjs-client/1.1.1/sockjs.min.js"></script>
 <script src="//cdn.bootcss.com/stomp.js/2.3.3/stomp.min.js"></script>
+<script src="../assert/common/require.js" data-main="../assert/common/fall-ball.js" type="text/javascript"></script>
 <script>
 
     $(document).ready(function (){
@@ -456,6 +464,9 @@
         seconds = Math.floor(tmpMsec / (1000));
         return days + " Days " + hours + " Hours " + minutes + " Minutes " + seconds + " Seconds.";
     }
+    var canvas=document.getElementById("canvas");
+    canvas.width = document.getElementById("container").width;
+    canvas.height = document.getElementById("container").height;
 </script>
 </body>
 </html>
