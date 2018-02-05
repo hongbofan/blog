@@ -51,10 +51,11 @@
 <noscript>
     <h2 style="color: #ff0000">不支持的浏览器版本,丫的是不是用IE了,你这简直是摧残程序员的生命</h2>
 </noscript>
-<canvas id="canvas">您的浏览器不支持 HTML5 canvas 标签。</canvas>
-    <div class="container">
-        <div class="page-header">
 
+    <div class="container">
+
+        <div class="page-header">
+            <canvas id="canvas" width="200%">您的浏览器不支持 HTML5 canvas 标签。</canvas>
             <h1 class="demo-headline">CIPHERS</h1>
             <h1> Imagine <small>Discover&Explore</small></h1>
         </div>
