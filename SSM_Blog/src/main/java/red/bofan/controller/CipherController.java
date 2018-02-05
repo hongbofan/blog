@@ -11,6 +11,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import red.bofan.model.Cipher;
+import red.bofan.model.CipherLog;
 import red.bofan.model.CipherVo;
 import red.bofan.util.HttpCode;
 import red.bofan.util.IP;
@@ -21,6 +22,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.*;
 
 /**
@@ -87,9 +89,8 @@ public class CipherController extends BaseController {
         if(!publishMap.get(id)){
             return getJsonVo("This cipher is unreachable",HttpCode.CIPHER_SELECT_ERROR);
         }
-
+        String ip = IP.getIpAddr(request);
         try {
-            String ip = IP.getIpAddr(request);
             JedisCache jedisCache = (JedisCache) cacheManager.getCache("cache4jds");
             Cache.ValueWrapper value = jedisCache.get("IP:"+ ip);
             if(value == null){
@@ -104,16 +105,27 @@ public class CipherController extends BaseController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        CipherLog log = new CipherLog();
+        log.setCipherId(id);
+        log.setLogId(UUID.randomUUID().toString());
+        log.setSubmitAnswer(answer);
+        log.setSubmitIp(ip);
+        log.setCreateTime(new Date());
+        log.setUpdateTime(new Date());
+        log.setCreateUser("1");
+        log.setUpdateUser("1");
+        cipherLogService.insert(log);
         try{
             Cipher cipher = cipherService.selectByPrimaryKey(id);
             if (answer.trim().toLowerCase().equals(cipher.getAnswer())) {
-                if("triones".equals(cipher.getAnswer())){
+                if("purposeful".equals(cipher.getAnswer())){
                     return getJsonVo("Accept,63946804", HttpCode.CIPHER_ANSWER_SUCCESS);
-                }else if("firecracker".equals(cipher.getAnswer())){
+                }else if("beautiful".equals(cipher.getAnswer())){
                     return getJsonVo("Accept,31695804", HttpCode.CIPHER_ANSWER_SUCCESS);
-                }else{
+                }else if ("dashing".equals(cipher.getAnswer())){
                     return getJsonVo("Accept,08085904", HttpCode.CIPHER_ANSWER_SUCCESS);
+                } else {
+                    return getJsonVo("Accept,",HttpCode.CIPHER_ANSWER_SUCCESS);
                 }
 
             } else {

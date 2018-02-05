@@ -22,6 +22,9 @@
         #cipher3_content img{
             display: block;width: 100%;height: auto;
         }
+        #cipher4_content img{
+            display: block;width: 100%;height: auto;
+        }
         #cipher1_title{
             font-size: 3.0vw;
         }
@@ -29,6 +32,9 @@
             font-size: 3.0vw;
         }
         #cipher3_title{
+            font-size: 3.0vw;
+        }
+        #cipher4_title{
             font-size: 3.0vw;
         }
         .login-dialog .modal-dialog {
