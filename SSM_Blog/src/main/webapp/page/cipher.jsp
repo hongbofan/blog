@@ -10,54 +10,56 @@
 <head>
     <jsp:include page="layout/head.jsp"></jsp:include>
     <style>
-        *{
-            word-break:break-all;
+        * {
+            word-break: break-all;
         }
-        #cipher1_content img{
-            display: block;width: 100%;height: auto;
+
+        #cipher1_content img,#cipher1_content,#cipher2_content img,#cipher2_content,#cipher3_content img,#cipher3_content,#cipher4_content img,#cipher4_content {
+            display: block;
+            width: 100%;
+            height: auto;
+            font-size: 1.5vw;
         }
-        #cipher2_content img{
-            display: block;width: 100%;height: auto;
+        #cipher1_hint1_content,#cipher1_hint2_content,#cipher1_hint3_content,
+        #cipher2_hint1_content,#cipher2_hint2_content,#cipher2_hint3_content,
+        #cipher3_hint1_content,#cipher3_hint2_content,#cipher3_hint3_content,
+        #cipher4_hint1_content,#cipher4_hint2_content,#cipher4_hint3_content{
+            font-size: 1.0vw;
         }
-        #cipher3_content img{
-            display: block;width: 100%;height: auto;
+
+        #cipher1_title,#cipher2_title,#cipher3_title,#cipher4_title {
+            font-size: 2.5vw;
         }
-        #cipher4_content img{
-            display: block;width: 100%;height: auto;
-        }
-        #cipher1_title{
-            font-size: 3.0vw;
-        }
-        #cipher2_title{
-            font-size: 3.0vw;
-        }
-        #cipher3_title{
-            font-size: 3.0vw;
-        }
-        #cipher4_title{
-            font-size: 3.0vw;
+        #headline1,#headline2 {
+            font-size: 4.0vw;
         }
         .login-dialog .modal-dialog {
             width: 300px;
         }
+
         .container {
             opacity: 0.9;
         }
     </style>
     <link rel="stylesheet" href="../assert/css/canvas.css">
 </head>
-<body>
+<body >
 <jsp:include page="layout/nav.jsp"></jsp:include>
 <noscript>
     <h2 style="color: #ff0000">不支持的浏览器版本,丫的是不是用IE了,你这简直是摧残程序员的生命</h2>
 </noscript>
 
-    <div class="container">
 
+<div class="container" id="root">
+    <div id="canvas-container" class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+        <canvas id="canvas">
+            Sorry. your browser not support canvas.
+        </canvas>
         <div class="page-header">
-            <canvas id="canvas" width="200%">您的浏览器不支持 HTML5 canvas 标签。</canvas>
-            <h1 class="demo-headline">CIPHERS</h1>
-            <h1> Imagine <small>Discover&Explore</small></h1>
+            <h1 class="demo-headline" id="headline1">CIPHERS</h1>
+            <h1 id="headline2"> Imagine
+                <small>Discover&Explore</small>
+            </h1>
         </div>
         <div id="cipher1">
             <input title="cipher1_id" id="cipher1_id" value="" hidden="hidden"/>
@@ -67,7 +69,8 @@
                         <div id="cipher1_hints" class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
                             <div id="cipher1_hint1">
                                 <div class="progress" style="margin-bottom: 0px">
-                                    <div id="cipher1_hint1_progress" class="progress-bar progress-bar-warning" role="progressbar"aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                    <div id="cipher1_hint1_progress" class="progress-bar progress-bar-warning"
+                                         role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
                                         0%
                                     </div>
                                 </div>
@@ -76,7 +79,8 @@
                             </div>
                             <div id="cipher1_hint2">
                                 <div class="progress" style="margin-bottom: 0px">
-                                    <div id="cipher1_hint2_progress" class="progress-bar progress-bar-success " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                    <div id="cipher1_hint2_progress" class="progress-bar progress-bar-success "
+                                         role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
                                         0%
                                     </div>
                                 </div>
@@ -85,7 +89,8 @@
                             </div>
                             <div id="cipher1_hint3">
                                 <div class="progress" style="border-radius: 4px;margin-bottom: 0px">
-                                    <div id="cipher1_hint3_progress" class="progress-bar progress-bar-striped " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                    <div id="cipher1_hint3_progress" class="progress-bar progress-bar-striped "
+                                         role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
                                         0%
                                     </div>
                                 </div>
@@ -96,7 +101,8 @@
                         </div>
                         <div id="cipher1_title_content" class="col-lg-8 col-sm-8 col-md-8 col-xs-8">
                             <div class="progress" style="margin-bottom: 0px">
-                                <div id="cipher1_progress" class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"  aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                <div id="cipher1_progress" class="progress-bar progress-bar-info progress-bar-striped"
+                                     role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
                                     0%
                                 </div>
                             </div>
@@ -109,7 +115,8 @@
                     <div class="input-group col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4 col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-3">
                         <input type="text" class="form-control" placeholder="input answer" id="cipher1_answer">
                         <span class="input-group-btn">
-                            <button type="submit" class="btn" onclick="answer1()" id="cipher1_search_button"><span class="fa fa-paper-plane"></span></button>
+                            <button type="submit" class="btn" onclick="answer1()" id="cipher1_search_button"><span
+                                    class="fa fa-paper-plane"></span></button>
                     </span>
                     </div>
                 </div>
@@ -123,7 +130,8 @@
                         <div id="cipher2_hints" class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
                             <div id="cipher2_hint1">
                                 <div class="progress" style="margin-bottom: 0px">
-                                    <div id="cipher2_hint1_progress" class="progress-bar progress-bar-warning" role="progressbar"aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                    <div id="cipher2_hint1_progress" class="progress-bar progress-bar-warning"
+                                         role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
                                         0%
                                     </div>
                                 </div>
@@ -132,7 +140,8 @@
                             </div>
                             <div id="cipher2_hint2">
                                 <div class="progress" style="margin-bottom: 0px">
-                                    <div id="cipher2_hint2_progress" class="progress-bar progress-bar-success " role="progressbar"aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                    <div id="cipher2_hint2_progress" class="progress-bar progress-bar-success "
+                                         role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
                                         0%
                                     </div>
                                 </div>
@@ -141,7 +150,8 @@
                             </div>
                             <div id="cipher2_hint3">
                                 <div class="progress" style="border-radius: 4px;margin-bottom: 0px">
-                                    <div id="cipher2_hint3_progress" class="progress-bar progress-bar-striped " role="progressbar"aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                    <div id="cipher2_hint3_progress" class="progress-bar progress-bar-striped "
+                                         role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
                                         0%
                                     </div>
                                 </div>
@@ -152,7 +162,8 @@
                         </div>
                         <div id="cipher2_title_content" class="col-lg-8 col-sm-8 col-md-8 col-xs-8">
                             <div class="progress" style="margin-bottom: 0px">
-                                <div id="cipher2_progress" class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                <div id="cipher2_progress" class="progress-bar progress-bar-info progress-bar-striped"
+                                     role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
                                     0%
                                 </div>
                             </div>
@@ -165,7 +176,8 @@
                     <div class="input-group col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4 col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-3">
                         <input type="text" class="form-control" placeholder="input answer" id="cipher2_answer">
                         <span class="input-group-btn">
-                            <button type="submit" class="btn" onclick="answer2()" id="cipher2_search_button"><span class="fa fa-paper-plane"></span></button>
+                            <button type="submit" class="btn" onclick="answer2()" id="cipher2_search_button"><span
+                                    class="fa fa-paper-plane"></span></button>
                     </span>
                     </div>
                 </div>
@@ -179,7 +191,8 @@
                         <div id="cipher3_hints" class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
                             <div id="cipher3_hint1">
                                 <div class="progress" style="margin-bottom: 0px">
-                                    <div id="cipher3_hint1_progress" class="progress-bar progress-bar-warning" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                    <div id="cipher3_hint1_progress" class="progress-bar progress-bar-warning"
+                                         role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
                                         0%
                                     </div>
                                 </div>
@@ -188,7 +201,8 @@
                             </div>
                             <div id="cipher3_hint2">
                                 <div class="progress" style="margin-bottom: 0px">
-                                    <div id="cipher3_hint2_progress" class="progress-bar progress-bar-success " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                    <div id="cipher3_hint2_progress" class="progress-bar progress-bar-success "
+                                         role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
                                         0%
                                     </div>
                                 </div>
@@ -197,7 +211,8 @@
                             </div>
                             <div id="cipher3_hint3">
                                 <div class="progress" style="border-radius: 4px;margin-bottom: 0px">
-                                    <div id="cipher3_hint3_progress" class="progress-bar progress-bar-striped " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                    <div id="cipher3_hint3_progress" class="progress-bar progress-bar-striped "
+                                         role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
                                         0%
                                     </div>
                                 </div>
@@ -208,7 +223,8 @@
                         </div>
                         <div id="cipher3_title_content" class="col-lg-8 col-sm-8 col-md-8 col-xs-8">
                             <div class="progress" style="margin-bottom: 0px">
-                                <div id="cipher3_progress" class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                <div id="cipher3_progress" class="progress-bar progress-bar-info progress-bar-striped"
+                                     role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
                                     0%
                                 </div>
                             </div>
@@ -221,7 +237,8 @@
                     <div class="input-group col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4 col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-3">
                         <input type="text" class="form-control" placeholder="input answer" id="cipher3_answer">
                         <span class="input-group-btn">
-                            <button type="submit" class="btn" onclick="answer3()" id="cipher3_search_button"><span class="fa fa-paper-plane"></span></button>
+                            <button type="submit" class="btn" onclick="answer3()" id="cipher3_search_button"><span
+                                    class="fa fa-paper-plane"></span></button>
                     </span>
                     </div>
                 </div>
@@ -235,7 +252,8 @@
                         <div id="cipher4_hints" class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
                             <div id="cipher4_hint1">
                                 <div class="progress" style="margin-bottom: 0px">
-                                    <div id="cipher4_hint1_progress" class="progress-bar progress-bar-warning" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                    <div id="cipher4_hint1_progress" class="progress-bar progress-bar-warning"
+                                         role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
                                         0%
                                     </div>
                                 </div>
@@ -244,7 +262,8 @@
                             </div>
                             <div id="cipher4_hint2">
                                 <div class="progress" style="margin-bottom: 0px">
-                                    <div id="cipher4_hint2_progress" class="progress-bar progress-bar-success " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                    <div id="cipher4_hint2_progress" class="progress-bar progress-bar-success "
+                                         role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
                                         0%
                                     </div>
                                 </div>
@@ -253,7 +272,8 @@
                             </div>
                             <div id="cipher4_hint3">
                                 <div class="progress" style="border-radius: 4px;margin-bottom: 0px">
-                                    <div id="cipher4_hint3_progress" class="progress-bar progress-bar-striped " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                    <div id="cipher4_hint3_progress" class="progress-bar progress-bar-striped "
+                                         role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
                                         0%
                                     </div>
                                 </div>
@@ -264,7 +284,8 @@
                         </div>
                         <div id="cipher4_title_content" class="col-lg-8 col-sm-8 col-md-8 col-xs-8">
                             <div class="progress" style="margin-bottom: 0px">
-                                <div id="cipher4_progress" class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                <div id="cipher4_progress" class="progress-bar progress-bar-info progress-bar-striped"
+                                     role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
                                     0%
                                 </div>
                             </div>
@@ -277,14 +298,16 @@
                     <div class="input-group col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4 col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-3">
                         <input type="text" class="form-control" placeholder="input answer" id="cipher4_answer">
                         <span class="input-group-btn">
-                            <button type="submit" class="btn" onclick="answer4()" id="cipher4_search_button"><span class="fa fa-paper-plane"></span></button>
+                            <button type="submit" class="btn" onclick="answer4()" id="cipher4_search_button"><span
+                                    class="fa fa-paper-plane"></span></button>
                     </span>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
+
+</div>
 
 <jsp:include page="layout/foot.jsp"></jsp:include>
 <script src="//cdn.bootcss.com/sockjs-client/1.1.1/sockjs.min.js"></script>
@@ -292,11 +315,12 @@
 <script src="../assert/common/require.js" data-main="../assert/common/fall-ball.js" type="text/javascript"></script>
 <script>
 
-    $(document).ready(function (){
+    $(document).ready(function () {
         $("#nav_home").removeClass("active");
         $("#nav_cipher").addClass("active");
         $("#nav_article").removeClass("active");
         $("#nav_login").removeClass("active");
+        CanvasAutoResize.initialize();
         connect();
     });
 </script>
@@ -306,98 +330,99 @@
     function connect() {
         var socket = new SockJS('/webSocket/hello.htm');
         stompClient = Stomp.over(socket);
-        stompClient.connect({}, function(frame) {
+        stompClient.connect({}, function (frame) {
             //console.log('Connected: ' + frame);
-            stompClient.subscribe('/subscribe/cipher', function(greeting){
+            stompClient.subscribe('/subscribe/cipher', function (greeting) {
                 //console.log(greeting);
                 var message = JSON.parse(greeting.body);
                 var ciphers = message.data;
-                for (var i = 1; i <= ciphers.length;i++){
+                for (var i = 1; i <= ciphers.length; i++) {
                     var cipher = ciphers[i - 1];
-                    var triggers = [cipher.trigger,cipher.hint1trigger,cipher.hint2trigger,cipher.hint3trigger];
-                    var times = [cipher.remainingMsec,cipher.fhintRemainingMsec,cipher.shintRemainingMsec,cipher.thintRemainingMsec];
+                    var triggers = [cipher.trigger, cipher.hint1trigger, cipher.hint2trigger, cipher.hint3trigger];
+                    var times = [cipher.remainingMsec, cipher.fhintRemainingMsec, cipher.shintRemainingMsec, cipher.thintRemainingMsec];
                     //如果该cipher没有设置id并且后台允许，则发送ajax请求cipher
-                    if($('#cipher'+ i +'_id').val() == "" && triggers[0]){
+                    if ($('#cipher' + i + '_id').val() == "" && triggers[0]) {
                         //console.log('#cipher'+ i +'_id');
-                        $('#cipher'+ i +'_id').val(cipher.id);
-                        getCipher(cipher.id,i);
-                    }else if($('#cipher'+ i +'_id').val() == "" && !triggers[0]){
+                        $('#cipher' + i + '_id').val(cipher.id);
+                        getCipher(cipher.id, i);
+                    } else if ($('#cipher' + i + '_id').val() == "" && !triggers[0]) {
                         var time = msec2Date(times[0]);
-                        $('#cipher'+ i + '_content').html(time);
+                        $('#cipher' + i + '_content').html(time);
                     }
-                    for(var j = 1;j <= 3;j++){
-                        if($('#cipher'+ i +'_hint' + j + '_id').val() == "" && triggers[j]){
+                    for (var j = 1; j <= 3; j++) {
+                        if ($('#cipher' + i + '_hint' + j + '_id').val() == "" && triggers[j]) {
                             //console.log('#cipher'+ i +'_hint' + j + '_id');
-                            $('#cipher'+ i +'_hint' + j + '_id').val(cipher.id);
-                            getHint(cipher.id,i,j);
-                        }else if ($('#cipher'+ i +'_hint' + j + '_id').val() == "" && !triggers[j]){
-                            $('#cipher'+ i + '_hint' + j + '_content').html(msec2Date(times[j]));
+                            $('#cipher' + i + '_hint' + j + '_id').val(cipher.id);
+                            getHint(cipher.id, i, j);
+                        } else if ($('#cipher' + i + '_hint' + j + '_id').val() == "" && !triggers[j]) {
+                            $('#cipher' + i + '_hint' + j + '_content').html(msec2Date(times[j]));
                         }
 
                     }
-                    setProgress(cipher,i);
+
+                    setProgress(cipher, i);
                 }
             });
         });
     }
-    var startTimeStamp = new Date('2016/12/1 0:0:0').getTime();
-    var hoursTimeStamp = 1000*60*60;
+    var startTimeStamp = new Date('2018/02/05 0:0:0').getTime();
+    var hoursTimeStamp = 1000 * 60 * 60;
     //设置进度条
-    setProgress = function (cipher,i) {
-        var currentHours = (new Date().getTime() - startTimeStamp)/hoursTimeStamp;
-        var publishHours = (cipher.publishTime - startTimeStamp)/hoursTimeStamp;
+    setProgress = function (cipher, i) {
+        var currentHours = (new Date().getTime() - startTimeStamp) / hoursTimeStamp;
+        var publishHours = (cipher.publishTime - startTimeStamp) / hoursTimeStamp;
         var progress = Math.floor(currentHours / publishHours * 100) + "%";
         //console.log(currentHours+","+ publishHours+","+ progress);
-        if(cipher.trigger){
-            $('#cipher'+i+'_progress').html('100%');
-            $('#cipher'+i+'_progress').css('width','100%');
-        }else{
-            $('#cipher'+i+'_progress').html(progress);
-            $('#cipher'+i+'_progress').css('width', progress);
+        if (cipher.trigger) {
+            $('#cipher' + i + '_progress').html('100%');
+            $('#cipher' + i + '_progress').css('width', '100%');
+        } else {
+            $('#cipher' + i + '_progress').html(progress);
+            $('#cipher' + i + '_progress').css('width', progress);
         }
         var hint1progress = Math.floor((currentHours - publishHours) / 6 * 100) + "%";
-        if(cipher.hint1trigger){
-            $('#cipher'+i+'_hint1_progress').html('100%');
-            $('#cipher'+i+'_hint1_progress').css('width', '100%');
-        }else{
-            $('#cipher'+i+'_hint1_progress').html(hint1progress);
-            $('#cipher'+i+'_hint1_progress').css('width', hint1progress);
+        if (cipher.hint1trigger) {
+            $('#cipher' + i + '_hint1_progress').html('100%');
+            $('#cipher' + i + '_hint1_progress').css('width', '100%');
+        } else {
+            $('#cipher' + i + '_hint1_progress').html(hint1progress);
+            $('#cipher' + i + '_hint1_progress').css('width', hint1progress);
         }
         var hint2progress = Math.floor((currentHours - publishHours) / 12 * 100) + "%";
-        if(cipher.hint2trigger){
-            $('#cipher'+i+'_hint2_progress').html('100%');
-            $('#cipher'+i+'_hint2_progress').css('width', '100%');
-        }else{
-            $('#cipher'+i+'_hint2_progress').html(hint2progress);
-            $('#cipher'+i+'_hint2_progress').css('width', hint2progress);
+        if (cipher.hint2trigger) {
+            $('#cipher' + i + '_hint2_progress').html('100%');
+            $('#cipher' + i + '_hint2_progress').css('width', '100%');
+        } else {
+            $('#cipher' + i + '_hint2_progress').html(hint2progress);
+            $('#cipher' + i + '_hint2_progress').css('width', hint2progress);
         }
         var hint3progress = Math.floor((currentHours - publishHours) / 18 * 100) + "%";
-        if(cipher.hint3trigger){
-            $('#cipher'+i+'_hint3_progress').html('100%');
-            $('#cipher'+i+'_hint3_progress').css('width', '100%');
-        }else{
-            $('#cipher'+i+'_hint3_progress').html(hint3progress);
-            $('#cipher'+i+'_hint3_progress').css('width', hint3progress);
+        if (cipher.hint3trigger) {
+            $('#cipher' + i + '_hint3_progress').html('100%');
+            $('#cipher' + i + '_hint3_progress').css('width', '100%');
+        } else {
+            $('#cipher' + i + '_hint3_progress').html(hint3progress);
+            $('#cipher' + i + '_hint3_progress').css('width', hint3progress);
         }
     };
 
-    answer = function (answer,id) {
-        if(id == ""){
+    answer = function (answer, id) {
+        if (id == "") {
             dialogDan.setMessage("This cipher is unreachable.").open();
             return;
         }
-        if(answer == ""){
+        if (answer == "") {
             dialogDan.setMessage("Input answer please.").open();
             return;
         }
         $.ajax({
-            url:"../cipher/"+id+"/answer.json",
-            data:{answer:answer},
-            type:"POST",
-            success:function (result) {
-                if(result.msg == "Wrong"){
+            url: "../cipher/" + id + "/answer.json",
+            data: {answer: answer},
+            type: "POST",
+            success: function (result) {
+                if (result.msg == "Wrong") {
                     dialogDan.setMessage(result.msg).open();
-                }else{
+                } else {
                     dialogSuc.setMessage(result.msg).open();
                 }
             }
@@ -406,55 +431,55 @@
     answer1 = function () {
         var cipher1_answer = $('#cipher1_answer').val();
         var id = $('#cipher1_id').val();
-        answer(cipher1_answer,id);
+        answer(cipher1_answer, id);
     };
     answer2 = function () {
         var cipher2_answer = $('#cipher2_answer').val();
         var id = $('#cipher2_id').val();
-        answer(cipher2_answer,id);
+        answer(cipher2_answer, id);
     };
     answer3 = function () {
         var cipher3_answer = $('#cipher3_answer').val();
         var id = $('#cipher3_id').val();
-        answer(cipher3_answer,id);
+        answer(cipher3_answer, id);
     };
-    answer4 = function() {
+    answer4 = function () {
         var cipher4_answer = $('#cipher4_answer').val();
         var id = $('#cipher4_id').val();
-        answer(cipher4_answer,id);
+        answer(cipher4_answer, id);
     }
 
-    getHint = function (id,i,j) {
+    getHint = function (id, i, j) {
         //alert(id+","+ i +","+ j);
         $.ajax({
-            url:"../cipher/"+id+"/hint.json?hint="+j,
-            type:"GET",
-            success:function (result) {
-                if(result.code == 200){
-                    $('#cipher'+ i +'_hint' + j + '_content').html("hint"+ j +":"+ result.data);
-                }else {
+            url: "../cipher/" + id + "/hint.json?hint=" + j,
+            type: "GET",
+            success: function (result) {
+                if (result.code == 200) {
+                    $('#cipher' + i + '_hint' + j + '_content').html("hint" + j + ":" + result.data);
+                } else {
                     dialogDan.setMessage(result.msg).open();
                 }
             }
         });
     };
-    getCipher = function (id,i) {
+    getCipher = function (id, i) {
         //alert(id+','+i);
         $.ajax({
-            url:"../cipher/"+id+".json",
-            type:"GET",
-            success:function (result) {
-                if (result.code == 200){
-                    $('#cipher'+ i + '_title').html(result.data.title);
-                    $('#cipher'+ i + '_content').html(result.data.content);
-                }else {
+            url: "../cipher/" + id + ".json",
+            type: "GET",
+            success: function (result) {
+                if (result.code == 200) {
+                    $('#cipher' + i + '_title').html(result.data.title);
+                    $('#cipher' + i + '_content').html(result.data.content);
+                } else {
                     dialogDan.setMessage(result.msg).open();
                 }
             }
         });
     };
-    function msec2Date(originMsec){
-        var tmpMsec,days,hours,minutes,seconds;
+    function msec2Date(originMsec) {
+        var tmpMsec, days, hours, minutes, seconds;
         tmpMsec = originMsec;
         days = Math.floor(tmpMsec / (1000 * 3600 * 24));
         tmpMsec = tmpMsec - days * (1000 * 3600 * 24);
@@ -465,9 +490,90 @@
         seconds = Math.floor(tmpMsec / (1000));
         return days + " Days " + hours + " Hours " + minutes + " Minutes " + seconds + " Seconds.";
     }
-    var canvas=document.getElementById("canvas");
-    canvas.width = document.getElementById("container").width;
-    canvas.height = document.getElementById("container").height;
+    var CanvasAutoResize = {
+        draw: function () {
+            var ctx = document.getElementById('canvas').getContext('2d');
+            var canvasContainer = document.getElementById('canvas-container');
+            if(ctx.canvas.width != canvasContainer.offsetWidth) {
+                ctx.canvas.width = canvasContainer.offsetWidth;
+            }
+            if(ctx.canvas.height != canvasContainer.offsetHeight + 10) {
+                ctx.canvas.height = canvasContainer.offsetHeight + 10;
+            }
+        },
+
+        initialize: function () {
+            var self = CanvasAutoResize;
+            self.draw();
+            $('#canvas-container').resize(function () {
+                self.draw();
+            });
+        }
+    };
+    (function($, h, c) {
+        var a = $([]), e = $.resize = $.extend($.resize, {}), i, k = "setTimeout", j = "resize", d = j
+                + "-special-event", b = "delay", f = "throttleWindow";
+        e[b] = 350;
+        e[f] = true;
+        $.event.special[j] = {
+            setup : function() {
+                if (!e[f] && this[k]) {
+                    return false
+                }
+                var l = $(this);
+                a = a.add(l);
+                $.data(this, d, {
+                    w : l.width(),
+                    h : l.height()
+                });
+                if (a.length === 1) {
+                    g()
+                }
+            },
+            teardown : function() {
+                if (!e[f] && this[k]) {
+                    return false
+                }
+                var l = $(this);
+                a = a.not(l);
+                l.removeData(d);
+                if (!a.length) {
+                    clearTimeout(i)
+                }
+            },
+            add : function(l) {
+                if (!e[f] && this[k]) {
+                    return false
+                }
+                var n;
+                function m(s, o, p) {
+                    var q = $(this), r = $.data(this, d);
+                    r.w = o !== c ? o : q.width();
+                    r.h = p !== c ? p : q.height();
+                    n.apply(this, arguments)
+                }
+                if ($.isFunction(l)) {
+                    n = l;
+                    return m
+                } else {
+                    n = l.handler;
+                    l.handler = m
+                }
+            }
+        };
+        function g() {
+            i = h[k](function() {
+                a.each(function() {
+                    var n = $(this), m = n.width(), l = n.height(), o = $
+                            .data(this, d);
+                    if (m !== o.w || l !== o.h) {
+                        n.trigger(j, [ o.w = m, o.h = l ])
+                    }
+                });
+                g()
+            }, e[b])
+        }
+    })(jQuery, this);
 </script>
 </body>
 </html>
