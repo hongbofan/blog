@@ -30,7 +30,12 @@ define(["require", "exports", "./system", "./paint", "./rectangle", "./ball-fact
         pause = !pause;
     };
     function action() {
+
         if (pause) {
+            var newCanvas = document.getElementById("canvas");
+            if (newCanvas.width != system.width || newCanvas.height != system.height) {
+                init();
+            }
             system.clear();
             clearDestroy();
             system.quadTree.refresh(null);
