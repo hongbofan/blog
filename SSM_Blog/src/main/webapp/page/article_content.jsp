@@ -17,7 +17,18 @@
 <jsp:include page="layout/nav.jsp"></jsp:include>
 <div class="container">
     <div class="page-header">
-        <h1 class="demo-headline" id="title">TITLE</h1>
+        <div class="row">
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                <h1 class="demo-headline" id="title">TITLE</h1>
+            </div>
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                <p>&nbsp;</p>
+                <a href="/article/editor.htm?id=${id}" class="btn-primary btn-lg" id="update">
+                    Update
+                </a>
+            </div>
+        </div>
+
     </div>
     <div class="row">
         <div id="test-editormd-view2" class="col-xs-12 col-sm-12 col-md-8 col-lg-8">

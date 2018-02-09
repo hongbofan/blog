@@ -26,16 +26,16 @@
             display: block;width: 100%;height: auto;
         }
         #cipher1_title{
-            font-size: 3.0vw;
+            font-size: 2.5vw;
         }
         #cipher2_title{
-            font-size: 3.0vw;
+            font-size: 2.5vw;
         }
         #cipher3_title{
-            font-size: 3.0vw;
+            font-size: 2.5vw;
         }
         #cipher4_title{
-            font-size: 3.0vw;
+            font-size: 2.5vw;
         }
         .login-dialog .modal-dialog {
             width: 300px;
@@ -51,11 +51,10 @@
 <noscript>
     <h2 style="color: #ff0000">不支持的浏览器版本,丫的是不是用IE了,你这简直是摧残程序员的生命</h2>
 </noscript>
-
+<canvas id="canvas" width="2700px" height="1800px">您的浏览器不支持 HTML5 canvas 标签。</canvas>
     <div class="container">
 
         <div class="page-header">
-            <canvas id="canvas" width="200%">您的浏览器不支持 HTML5 canvas 标签。</canvas>
             <h1 class="demo-headline">CIPHERS</h1>
             <h1> Imagine <small>Discover&Explore</small></h1>
         </div>
@@ -335,6 +334,7 @@
                         }
 
                     }
+
                     setProgress(cipher,i);
                 }
             });
@@ -466,8 +466,8 @@
         return days + " Days " + hours + " Hours " + minutes + " Minutes " + seconds + " Seconds.";
     }
     var canvas=document.getElementById("canvas");
-    canvas.width = document.getElementById("container").width;
-    canvas.height = document.getElementById("container").height;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 </script>
 </body>
 </html>

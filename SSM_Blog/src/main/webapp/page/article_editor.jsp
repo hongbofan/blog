@@ -38,6 +38,7 @@
             $("#nav_cipher").removeClass("active");
             $("#nav_article").addClass("active");
             $("#nav_login").removeClass("active");
+            showArticleInfo("${id}");
             testEditor = editormd("test-editormd", {
                 width   : "90%",
                 height  : 740,
@@ -57,6 +58,17 @@
                 sequenceDiagram : true,       // 开启时序/序列图支持，默认关闭,
             });
         });
+        showArticleInfo=function(id){
+            $.ajax({url:"../article/"+id+".json",method:"GET",success:function(result){
+                if (result.code == 200){
+                    $("#test-editormd-markdown-doc").text(result.data.content);
+                    $("#title").val(result.data.title);
+                }else {
+                    dialogDan.setMessage(result.msg).open();
+                }
+
+            }});
+        };
     </script>
 </body>
 </html>

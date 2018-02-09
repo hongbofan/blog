@@ -119,13 +119,13 @@ public class CipherController extends BaseController {
             Cipher cipher = cipherService.selectByPrimaryKey(id);
             if (answer.trim().toLowerCase().equals(cipher.getAnswer())) {
                 if("purposeful".equals(cipher.getAnswer())){
-                    return getJsonVo("Accept,63946804", HttpCode.CIPHER_ANSWER_SUCCESS);
+                    return getJsonVo("Accept,50657204", HttpCode.CIPHER_ANSWER_SUCCESS);
                 }else if("beautiful".equals(cipher.getAnswer())){
-                    return getJsonVo("Accept,31695804", HttpCode.CIPHER_ANSWER_SUCCESS);
+                    return getJsonVo("Accept,71136304", HttpCode.CIPHER_ANSWER_SUCCESS);
                 }else if ("dashing".equals(cipher.getAnswer())){
-                    return getJsonVo("Accept,08085904", HttpCode.CIPHER_ANSWER_SUCCESS);
+                    return getJsonVo("Accept,06821604", HttpCode.CIPHER_ANSWER_SUCCESS);
                 } else {
-                    return getJsonVo("Accept,",HttpCode.CIPHER_ANSWER_SUCCESS);
+                    return getJsonVo("Accept,27083204",HttpCode.CIPHER_ANSWER_SUCCESS);
                 }
 
             } else {

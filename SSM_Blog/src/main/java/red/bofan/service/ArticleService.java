@@ -31,6 +31,10 @@ public class ArticleService {
     public int insertSelective(Article article){
         return articleMapper.insertSelective(article);
     }
+    @CachePut(value = "cache4jds",key = "'article.selectByPageWithSearch'")
+    public int updateSelective(Article article){
+        return articleMapper.updateByPrimaryKeySelective(article);
+    }
     //@Cacheable(value = "cache4jds",key="'article.selectByPageWithSearch('+#pagenum+','+#pagesize+','+#title+')'")
     public PaginationVo<Article> selectByPageWithSearch(int pagenum,int pagesize,String title){
         //int pagenum是当前的页码,int pagesize是每页显示的数据数量

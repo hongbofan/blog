@@ -39,25 +39,42 @@ public class ArticleController extends BaseController{
     @RequestMapping(value = "/upload.json", method = RequestMethod.POST)
     public JsonVo upload(@RequestParam(value = "test-editormd-markdown-doc", required = false) String markdown,
                          @RequestParam(value = "test-editormd-html-code", required = false) String html,
-                         @RequestParam(value = "title",required = false)String title) {
-        String id = UUID.randomUUID().toString();
-        Article article = new Article();
-        article.setId(id);
-        article.setContent(markdown);
-        article.setTitle(title);
-        article.setLastDate(new Date());
+                         @RequestParam(value = "title",required = false)String title,
+                         @RequestParam(value = "id")String id) {
+        Article article;
+        if (id == null) {
+            article = new Article();
+            article.setId(UUID.randomUUID().toString());
+            article.setContent(markdown);
+            article.setTitle(title);
+            article.setLastDate(new Date());
+        } else {
+            article = articleService.selectByPrimaryKey(id);
+            article.setContent(markdown);
+            article.setTitle(title);
+            article.setLastDate(new Date());
+        }
         String principal = SecurityUtils.getSubject().getPrincipal().toString();
         //姓名获取用户id验证
         try{
             User currentUser = userService.selectByName(principal);
+            if (article.getUserId() != null && !article.getUserId().equals(currentUser.getId())) {
+                return getJsonVo("Invalid user",HttpCode.USER_SELECT_ERROR);
+            }
             article.setUserId(currentUser.getId());
         }catch (Exception e){
             System.out.println(e.getMessage());
             return getJsonVo("Invalid user",HttpCode.USER_SELECT_ERROR);
         }
+
         //插入文章验证
         try{
-            System.out.println(articleService.insertSelective(article));
+            if (id == null) {
+                System.out.println(articleService.insertSelective(article));
+            }else {
+                System.out.println(articleService.updateSelective(article));
+            }
+
             return getJsonVo("Success",HttpCode.OK);
         }catch (Exception e){
             System.out.println(e.getMessage());
@@ -79,7 +96,7 @@ public class ArticleController extends BaseController{
     @ResponseBody
     @RequestMapping(value = "/list.json", method = RequestMethod.GET)
     public JsonVo list(@RequestParam(value = "p", defaultValue = "1") Integer p,
-                    @RequestParam(value = "title", defaultValue = "") String title) {
+                       @RequestParam(value = "title", defaultValue = "") String title) {
         try {
             PaginationVo<Article> paginationVo = articleService.selectByPageWithSearch(p, 8, title);
             Map<String, Object> result = new HashMap<>();
@@ -103,7 +120,8 @@ public class ArticleController extends BaseController{
         return "article_list";
     }
     @RequestMapping(value = "/editor.htm", method = RequestMethod.GET)
-    public String editor() {
+    public String editor(@RequestParam(name = "id")String id, Model model) {
+        model.addAttribute("id", id);
         return "article_editor";
     }
 
